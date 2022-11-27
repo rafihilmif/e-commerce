@@ -481,8 +481,6 @@
                     <div class="card" style="width: 100%;">
                         <div class="card-body">
                             <h5 class="card-title">General Form Elements</h5>
-
-                            <!-- General Form Elements -->
                             <form>
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>

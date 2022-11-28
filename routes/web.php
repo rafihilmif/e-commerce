@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SellerController;
 use App\Models\Customer;
@@ -60,15 +61,11 @@ Route::group(['prefix' => 'customer',  'middleware' => 'auth'], function () {
 });
 Route::prefix('admin')->group(function () {
     Route::prefix('/')->group(function () {
-        Route::get('home', function () {
-            return view('admin.home');
-        });
-        Route::get('add/user', function () {
-            return view('admin.add');
-        });
-        Route::get('update/user', function () {
-            return view('admin.update');
-        });
+        Route::get('home', [AdminController::class, 'home']);
+        Route::get('add/user', [AdminController::class, 'add'])->name('adduser');
+        Route::post('add/user', [AdminController::class, 'adduser'])->name('doadduser');
+        Route::get('update/user', [AdminController::class, 'ubah'])->name('ubah');
+        Route::post('update/user', [AdminController::class, 'doubah'])->name('doubah');
     });
 });
 Route::prefix('seller')->group(function () {

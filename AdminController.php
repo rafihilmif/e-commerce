@@ -46,11 +46,42 @@ class AdminController extends Controller
             'phone' => $req->phone
         ]);
         if($res){
-            return redirect()->back();
+            return redirect()->back()->with('pesan','Berhasil Menambah Customer');
         }
     }
 
     public function ubah(Request $req){
+        $customer = Customer::all()->find($req->id);
+        $param["daftarcustomer"] = $customer;
         return view('admin.update');
+    }
+
+    public function doubah(Request $req){
+        $req->validate(
+            [
+                'email' => 'required',
+                'name' => 'required',
+                'password' => 'required|min:8',
+                'address' => 'required',
+                'city' => 'required',
+                'provinsi' => 'required',
+                'birthdate' => 'required',
+                'phone' => 'required'
+            ]
+        );
+        $ubahcust = Customer::find($req->id);
+        $ubahcust->email = $req->email;
+        $ubahcust->name = $req->name;
+        $ubahcust->password = $req->password;
+        $ubahcust->gender = $req->rbgender;
+        $ubahcust->province = $req->provinsi;
+        $ubahcust->city = $req->city;
+        $ubahcust->birthdate = $req->birthdate;
+        $ubahcust->phone = $req->phone;
+        $ubahcust->id = Uuid::uuid4()->getHex();
+        $res = $ubahcust->save();
+        if($res){
+            return redirect("admin/update/user/{{$req->id}}")->with('pesan', 'Berhasil Mengubah Customer');
+        }
     }
 }

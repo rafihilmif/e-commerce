@@ -12,7 +12,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ url('admin/home') }}" class='sidebar-link'>
                         <i class="bi bi-pc-display-horizontal"></i>
                         <span>Dashboard</span>
                     </a>
@@ -22,7 +22,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('adduser') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill-add"></i>
                         <span>Add Customer</span>
                     </a>
@@ -32,7 +32,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('ubah') }}" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
                         <span>Update Customer</span>
                     </a>
@@ -42,7 +42,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('login') }}" class='sidebar-link'>
                         <i class="bi bi-gear"></i>
                         <span>Log Customer</span>
                     </a>

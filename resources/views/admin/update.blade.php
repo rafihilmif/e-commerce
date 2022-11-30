@@ -16,7 +16,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    @include('admincustomer')
+    @include('adminsellerstyle')
 </head>
 <body>
     @include('template.sidebaradmin')
@@ -29,7 +29,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form text-center ml-10" action="{{ route('ubah') }}" method="POST">
+                                        <form class="form text-center ml-10" action="{{ route('doUbah') }}" method="POST">
                                             @csrf
                                             @if (Session::has('pesan'))
                                                 <div class="sukses">{{ $Session::get('pesan') }}</div>

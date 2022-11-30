@@ -22,7 +22,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="{{ route('adduser') }}" class='sidebar-link'>
+                    <a href="{{ route('addUser') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill-add"></i>
                         <span>Add Customer</span>
                     </a>
@@ -32,7 +32,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="{{ route('ubah') }}" class='sidebar-link'>
+                    <a href="{{ route('ubahUser') }}" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
                         <span>Update Customer</span>
                     </a>

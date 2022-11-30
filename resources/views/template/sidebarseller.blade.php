@@ -22,7 +22,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="{{route('add')}}" class='sidebar-link'>
+                    <a href="{{route('addProduct')}}" class='sidebar-link'>
                         <i class="bi bi-plus-circle"></i>
                         <span>Add Product</span>
                     </a>

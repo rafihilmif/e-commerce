@@ -37,7 +37,7 @@ Route::get('/contactus', function () {
 });
 
 Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
-Route::get('search/{name}', [SellerController::class, 'productSearch'])->name('search');
+
 Route::get('collection/{name}', [SellerController::class, 'productCategory'])->name('collection');
 
 Route::get('artist/{name}', [SellerController::class, 'productArtist'])->name('artists');
@@ -62,10 +62,10 @@ Route::group(['prefix' => 'customer',  'middleware' => 'auth'], function () {
 Route::prefix('admin')->group(function () {
     Route::prefix('/')->group(function () {
         Route::get('home', [AdminController::class, 'home']);
-        Route::get('add/user', [AdminController::class, 'add'])->name('addUser');
-        Route::post('add/user', [AdminController::class, 'adduser'])->name('doAddUser');
-        Route::get('update/user', [AdminController::class, 'ubah'])->name('ubahUser');
-        Route::post('update/user', [AdminController::class, 'doubah'])->name('doUbah');
+        Route::get('add/user', [AdminController::class, 'add'])->name('add');
+        Route::post('add/user', [AdminController::class, 'addUser'])->name('addUser');
+        Route::get('update/user', [AdminController::class, 'ubah'])->name('ubah');
+        Route::post('update/user', [AdminController::class, 'ubahUser'])->name('ubahUser');
     });
 });
 Route::prefix('seller')->group(function () {
@@ -74,7 +74,7 @@ Route::prefix('seller')->group(function () {
             return view('seller.home');
         });
         Route::post('add/product', [SellerController::class, 'addProduct'])->name('addProduct');
-        Route::get('add/product', [SellerController::class, 'product'])->name('addPro');
+        Route::get('add/product', [SellerController::class, 'product'])->name('add');
 
         Route::post('properties/product', [SellerController::class, 'addProperties'])->name('addProperties');
         Route::get('properties/product', [SellerController::class, 'properties'])->name('properties');

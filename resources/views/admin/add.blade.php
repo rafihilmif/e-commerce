@@ -29,7 +29,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form text-center ml-10" action="{{ route('adduser') }}" method="POST">
+                                        <form class="form text-center ml-10" action="{{ route('doAddUser') }}" method="POST">
                                             @csrf
                                             {{-- @if (Session::has('pesan'))
                                                 <div class="sukses">{{ $Session::get('pesan') }}</div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2022 at 06:31 AM
+-- Generation Time: Nov 30, 2022 at 01:41 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -55,7 +55,19 @@ INSERT INTO `artist` (`id`, `name`) VALUES
 ('ART-00016', 'Zeal & Ardor'),
 ('ART-00017', 'Uniform'),
 ('ART-00018', 'Lord'),
-('ART-00019', 'Spectral Wound');
+('ART-00019', 'Spectral Wound'),
+('ART-00020', 'Gatecreeper'),
+('ART-00021', 'Bathory'),
+('ART-00022', 'Blood Incantation'),
+('ART-00023', 'DeafHeaven'),
+('ART-00024', 'Power Trip'),
+('ART-00025', 'Bad Brains'),
+('ART-00026', 'Conan'),
+('ART-00027', 'Converge'),
+('ART-00028', 'Windhand'),
+('ART-00029', 'Venom'),
+('ART-00030', 'Age of Apocalypse'),
+('ART-00031', 'End');
 
 -- --------------------------------------------------------
 
@@ -90,7 +102,6 @@ INSERT INTO `category` (`id`, `parent`, `name`) VALUES
 ('CAT-00001', 'Apparel', 'T-Shirt'),
 ('CAT-00002', 'Apparel', 'Longsleeve'),
 ('CAT-00003', 'Apparel', 'Hoodie'),
-('CAT-00004', 'Apparel', 'Pullover'),
 ('CAT-00005', 'Apparel', 'Zip Hoodie'),
 ('CAT-00006', 'Apparel', 'Crewneck'),
 ('CAT-00007', 'Music', '12\"-Vinyl'),
@@ -205,8 +216,35 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `id_category`, `id_artist`, `tag`, `name`, `material`, `price`, `desc`, `image`) VALUES
-('ITM-00001', 'CAT-00001', 'ART-00008', 'New States Apparel', 'AMENRA \"DE DOORN 2\" T-SHIRT', 'Polyster', 560000, 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '1669535501.jpg'),
-('ITM-00002', 'CAT-00002', 'ART-00019', 'New States Apparel', 'SPECTRAL WOUND \"INFERNAL DECADENCE\" LONGSLEEVE', 'Cotton', 360000, 'Please note that we do our best to protect vinyl records ideally for shipping, using our custom made mailers and additional cardboard squares. However, we can not guarantee that no damage on the way occurs.', '1669536988.jpg');
+('ITM-00001', 'CAT-00001', 'ART-00008', 'New States Apparel', 'AMENRA \"DE DOORN BLACK\" T-SHIRT', 'Polyster', 560000, 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '1669535501.jpg'),
+('ITM-00003', 'CAT-00002', 'ART-00020', 'Gildan', 'GATECREEPER \"AN REALITY\" LONGSLEEVE', 'Cotton', 600000, 'AN UNEXPECTED\' LONGSLEEVE', '1669714702.jpg'),
+('ITM-00004', 'CAT-00002', 'ART-00020', 'Gildan', 'GATECREEPER \"TUG OF WAR\" LONGSLEEVE', 'Cotton', 600000, 'TUG OF WAR\' LONGSLEEVE', '1669715108.jpg'),
+('ITM-00005', 'CAT-00002', 'ART-00020', 'Gildan', 'GATECREEPER \"SKULL\" LONGSLEEVE', 'Cotton', 600000, 'SKULL\' LONGSLEEVE', '1669715320.jpg'),
+('ITM-00006', 'CAT-00002', 'ART-00020', 'Gildan', 'GATECREEPER \"DESERTED\" LONGSLEEVE', 'Cotton', 600000, 'DESERTED\' LONGSLEEVE', '1669715460.jpg'),
+('ITM-00007', 'CAT-00002', 'ART-00008', 'New States Apparel', 'AMENRA \"BRANCA LANAS\" LONGSLEEVE', 'Cotton', 780000, 'BRANCA\' LONGSLEEVE', '1669715575.jpg'),
+('ITM-00008', 'CAT-00002', 'ART-00021', 'Gildan', 'BATHORY \"UNDER THE SIGN\" LONGSLEEVE', 'Cotton', 670000, 'UNDER THE SIGN\' LONGSLEEVE', '1669715730.jpg'),
+('ITM-00009', 'CAT-00002', 'ART-00022', 'New States Apparel', 'BLOOD INCANTATION \"EXTINCTION\" LONGSLEEVE', 'Cotton', 700000, 'INTERDIMENSIONAL EXTINCTION\' LONGSLEEVE', '1669716099.jpg'),
+('ITM-00010', 'CAT-00002', 'ART-00007', 'Gildan', 'BLOOD INCANTATION \"HUMAN RACE\" LONGSLEEVE', 'Cotton', 768000, 'HIDDEN HISTORY OF THE HUMAN RACE\' LONGSLEEVE', '1669716202.jpg'),
+('ITM-00011', 'CAT-00002', 'ART-00023', 'Gildan', 'DEAFHEAVEN \"WAVEFORM - WHITE\" LONGSLEEVE', 'Cotton', 900000, 'WAVEFORM WHITE\' LONGSLEEVE', '1669716529.jpg'),
+('ITM-00012', 'CAT-00002', 'ART-00023', 'Gildan', 'DEAFHEAVEN \"WAVEFORM BLACK\" LONGSLEEVE', 'Cotton', 900000, 'WAVEFORM BLACK\' LONGSLEEVE', '1669716648.jpg'),
+('ITM-00013', 'CAT-00002', 'ART-00024', 'New States Apparel', 'POWER TRIP \"PRISON\" LONGSLEEVE', 'Cotton', 950000, 'PRISON\' LONGSLEEVE', '1669716735.jpg'),
+('ITM-00014', 'CAT-00002', 'ART-00024', 'Gildan', 'POWER TRIP \"NIGHTMARE LOGIC\" LONGSLEEVE', 'Cotton', 780000, 'NIGHTMARE LOGIC\' LONGSLEEVE', '1669716860.jpg'),
+('ITM-00015', 'CAT-00002', 'ART-00021', 'Gildan', 'BATHORY \"GOAT\" LONGSLEEVE', 'Cotton', 800000, 'GOAT\' LONGSLEEVE', '1669734122.jpg'),
+('ITM-00016', 'CAT-00001', 'ART-00025', 'Gildan', 'BAD BRAINS \"BAD BRAINS\" T-SHIRT', 'Cotton', 600000, 'BAD BRAINS\' T-SHIRT', '1669735015.jpg'),
+('ITM-00017', 'CAT-00001', 'ART-00026', 'Gildan', 'CONAN \"HORSEBACK STAGE\" T-SHIRT', 'Cotton', 350000, 'HORSEBACK\'  T-SHIRT', '1669735229.jpg'),
+('ITM-00018', 'CAT-00001', 'ART-00026', 'Gildan', 'CONAN \"8 BIT FANTASY\" T-SHIRT', 'Cotton', 400000, '8 BIT FANTASY\'  T-SHIRT', '1669735342.jpg'),
+('ITM-00019', 'CAT-00001', 'ART-00027', 'Gildan', 'CONVERGE \"JANE DOE GREEN\" T-SHIRT', 'Cotton', 450000, 'JANE DOE GREEN\'  T-SHIRT', '1669735572.jpg'),
+('ITM-00020', 'CAT-00001', 'ART-00027', 'Gildan', 'CONVERGE \"JANE DOE RED\" T-SHIRT', 'Cotton', 450000, 'JANE DOE RED\'  T-SHIRT', '1669735632.jpg'),
+('ITM-00021', 'CAT-00001', 'ART-00027', 'Gildan', 'CONVERGE \"JANE DOE BW\" T-SHIRT', 'Cotton', 450000, 'JANE DOE BW\'  T-SHIRT', '1669735707.jpg'),
+('ITM-00022', 'CAT-00001', 'ART-00028', 'Gildan', 'WINDHAND \"DIABLERIE\" T-SHIRT', 'Cotton', 350000, 'DIABLERIE\'  T-SHIRT', '1669742212.jpg'),
+('ITM-00023', 'CAT-00001', 'ART-00028', 'Gildan', 'WINDHAND \"TRAVELER\" T-SHIRT', 'Cotton', 350000, 'TRAVELER\'  T-SHIRT', '1669742344.jpg'),
+('ITM-00024', 'CAT-00001', 'ART-00024', 'Gildan', 'POWER TRIP \"RUINATION\" T-SHIRT', 'Cotton', 450000, 'RUINATION\'  T-SHIRT', '1669742420.jpg'),
+('ITM-00025', 'CAT-00001', 'ART-00024', 'Gildan', 'POWER TRIP \"FIRING SQUAD\" T-SHIRT', 'Cotton', 450000, 'FIRING SQUAD\'  T-SHIRT', '1669742593.jpg'),
+('ITM-00026', 'CAT-00001', 'ART-00024', 'Gildan', 'POWER TRIP \"EVIL BEAT\" T-SHIRT', 'Cotton', 450000, 'EVIL BEAT\'  T-SHIRT', '1669742684.jpg'),
+('ITM-00027', 'CAT-00001', 'ART-00029', 'Gildan', 'VENOM \"CALM BEFORE THE STORM\" T-SHIRT', 'Cotton', 550000, 'CALM BEFORE THE STORM\'  T-SHIRT', '1669742794.jpg'),
+('ITM-00028', 'CAT-00003', 'ART-00030', 'Gildan', 'AGE OF APOCALYPSE \"HANDS\" HOODIE', 'Cotton', 650000, 'HANDS\'  HOODIE', '1669743080.jpg'),
+('ITM-00029', 'CAT-00003', 'ART-00031', 'New States Apparel', 'END \"UNFORGIVING ARMS\" HOODIE', 'Cotton', 650000, 'UNFORGIVING ARMS\'  HOODIE', '1669743158.jpg'),
+('ITM-00030', 'CAT-00003', 'ART-00031', 'Gildan', 'END \"CHURCH TO THE PRISE\" HOODIE', 'Cotton', 650000, 'CHURCH\'  HOODIE', '1669743513.jpg');
 
 -- --------------------------------------------------------
 

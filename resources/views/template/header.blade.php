@@ -15,7 +15,7 @@
                             <nav>
                                 <ul>
                                     <li><a href="{{ route('landing') }}">HOME</a></li>
-                                    <li class="angle-shape"><a href="shop.html">CATEGORIES<span>new</span> </a>
+                                    <li class="angle-shape"><a href="shop.html">CATEGORIES</a>
                                         <ul class="mega-menu">
                                             <li><a class="menu-title" href="#">APPAREL</a>
                                                 <ul>
@@ -59,7 +59,7 @@
                                         </ul>
                                     </li>
                                     <li class="angle-shape"><a href="shop.html">ARTIST
-                                            STORES<span>hot</span></a>
+                                            STORES</a>
                                         <ul class="mega-menu">
                                             <li><a class="menu-title" href="#">ARTIST (A-E)</a>
                                                 <ul>

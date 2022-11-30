@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Product_properties;
@@ -15,15 +16,15 @@ class SellerController extends Controller
 {
     public function landing(Request $req)
     {
-        $product = Product::all();
+        $product = DB::table('product')->paginate(8);
         return view('landing', ['title' => 'Noiseblod'], compact('product'));
     }
     public function product()
     {
         $product = Product::all();
-        $category = Category::all();
-        $artist = Artist::all();
-        $tag = Tag::all();
+        $category = Category::all()->sortBy('name');
+        $artist = Artist::all()->sortBy('name');
+        $tag = Tag::all()->sortBy('name');
         return view('seller.add', ['title' => 'Add Product'], compact('product', 'category', 'artist', 'tag'));
     }
     public function properties()
@@ -142,7 +143,7 @@ class SellerController extends Controller
     public function productCategory($name)
     {
         $category = Category::where('name', $name)->first();
-        $product = Product::where('id_category', $category->id)->get();
+        $product = Product::where('id_category', $category->id)->paginate(12);
         return view('collection', compact('category', 'product'));
     }
     public function productArtist($name)
@@ -150,5 +151,14 @@ class SellerController extends Controller
         $artist = Artist::where('name', $name)->first();
         $product = Product::where('id_artist', $artist->id)->get();
         return view('artist', compact('artist', 'product'));
+    }
+    public function productSearch()
+    {
+        $category = Category::select('id')->get();
+        $project = Product::query();
+        if (request('term')) {
+            $project->where('id_category', $category->id)->where('name', 'Like', '%' . request('term') . '%');
+        }
+        return $project->orderBy('id', 'DESC')->paginate(10);
     }
 }

@@ -36,7 +36,7 @@ Route::get('/contactus', function () {
 });
 
 Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
-
+Route::get('search/{name}', [SellerController::class, 'productSearch'])->name('search');
 Route::get('collection/{name}', [SellerController::class, 'productCategory'])->name('collection');
 
 Route::get('artist/{name}', [SellerController::class, 'productArtist'])->name('artists');

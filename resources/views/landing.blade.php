@@ -27,7 +27,7 @@
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="contact-us.html">BEST SELLER</a></li>
+                                            <li><a href="contact-us.html">HOME</a></li>
                                             <li class="angle-shape"><a href="shop.html">CATEGORIES</a>
                                                 <ul class="mega-menu">
                                                     <li><a class="menu-title" href="#">APPAREL</a>
@@ -157,7 +157,9 @@
                                                     </li>
                                                 </ul>
                                             </li>
+                                            <li><a href="contact-us.html">ABOUT US</a></li>
                                         </ul>
+                                        
                                     </nav>
                                 </div>
                             </div>
@@ -355,10 +357,10 @@
                                     </div>
                                     <div class="ht-product-content">
                                         <div class="ht-product-content-inner">
-                                            <h4 class="ht-product-title"><a href="#">{{ $item->name }}</a>
+                                            <h4 class="ht-product-title"><a href="#">{{ strtoupper($item->name) }}</a>
                                             </h4>
                                             <div class="ht-product-price">
-                                                <span class="new">{{ $item->price }}</span>
+                                                <span class="new">@currency($item->price)</span>
                                             </div>
                                         </div>
                                         <div class="ht-product-action">

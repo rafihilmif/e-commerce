@@ -20,25 +20,30 @@
 </head>
 <body>
     @include('template.sidebaradmin')
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
         <div class="page-heading">
             <div class="page-title">
-                <h3 class="text-center">Add Customer</h3>
+                <h3>Add Customer</h3>
                 <section id="multiple-column-form">
                     <div class="row match-height">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form text-center ml-10" action="{{ route('doAddUser') }}" method="POST">
+                                        <form class="form" action="{{ route('addUser') }}" method="POST"
+                                            enctype="multipart/form-data">
                                             @csrf
-                                            {{-- @if (Session::has('pesan'))
-                                                <div class="sukses">{{ $Session::get('pesan') }}</div>
-                                            @endif --}}
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group" style="position: relative; left: 100px;">
-                                                        <label for="">Email :</label>
-                                                        <input type="text" name="email" id="">
+                                                    <div class="form-group">
+                                                        <label for="first-name-column">Email</label>
+                                                        <input type="text" id="first-name-column"
+                                                            class="form-control" placeholder="Email" name="email">
                                                         @error('email')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -46,17 +51,19 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="">Name :</label>
-                                                        <input type="text" name="name" id="">
+                                                        <label for="last-name-column">Name</label>
+                                                        <input type="text" id="first-name-column"
+                                                            class="form-control" placeholder="Name" name="name">
                                                         @error('name')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group" style="position: relative; left: 100px;">
-                                                        <label for="">Password :</label>
-                                                        <input type="password" name="password" id="">
+                                                    <div class="form-group">
+                                                        <label for="city-column">Password</label>
+                                                        <input type="password" id="first-name-column"
+                                                        class="form-control" placeholder="Password" name="password">
                                                         @error('password')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -64,15 +71,16 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="">Gender</label>
+                                                        <label for="city-column">Gender</label>
                                                         <input type="radio" name="rbgender" id="">Laki-laki
                                                         <input type="radio" name="rbgender" id="">Perempuan
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group" style="position: relative; left: 100px;">
-                                                        <label for="">Address :</label>
-                                                        <input type="text" name="address" id="">
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        <input type="text" id="first-name-column"
+                                                        class="form-control" placeholder="Address" name="address">
                                                         @error('address')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -80,35 +88,36 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="">Provinsi :</label>
-                                                        <input type="text" name="provinsi" id="">
+                                                        <label>Provinsi</label>
+                                                        <input type="text" id="first-name-column"
+                                                            class="form-control" placeholder="Provinsi" name="provinsi">
                                                         @error('provinsi')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="form-group" style="position: relative; left: 350px;">
-                                                        <label for="">City :</label>
-                                                        <input type="text" name="city" id="">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <input type="text" class="form-control" name="city">
                                                         @error('city')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="form-group" style="position: relative; left: 350px;">
-                                                        <label for="">Birthdate :</label>
-                                                        <input type="date" name="birthdate" id="">
+                                                    <div class="form-group">
+                                                        <label>BirthDate</label>
+                                                        <input type="date" name="birthdate" id="" class="form-control">
                                                         @error('birthdate')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="form-group" style="position: relative; left: 350px;">
-                                                        <label for="">Phone :</label>
-                                                        <input type="text" name="phone" id="">
+                                                    <div class="form-group">
+                                                        <label>Phone</label>
+                                                        <input type="text" name="phone" id="" class="form-control">
                                                         @error('phone')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -117,52 +126,58 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <button type="submit"
-                                                            class="btn btn-primary form-control" name="add">add</button>
+                                                            class="btn btn-primary form-control">Add</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Email</th>
-                                                <th>Name</th>
-                                                <th>Password</th>
-                                                <th>gender</th>
-                                                <th>address</th>
-                                                <th>Provinsi</th>
-                                                <th>Kota</th>
-                                                <th>Tanggal Lahir</th>
-                                                <th>Nomor Telepon</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($daftarcustomer as $cust)
-                                                <tr>
-                                                    <td>{{ $cust->id }}</td>
-                                                    <td>{{ $cust->email }}</td>
-                                                    <td>{{ $cust->name }}</td>
-                                                    <td>{{ $cust->password }}</td>
-                                                    <td>{{ $cust->gender }}</td>
-                                                    <td>{{ $cust->address }}</td>
-                                                    <td>{{ $cust->province }}</td>
-                                                    <td>{{ $cust->city }}</td>
-                                                    <td>{{ $cust->birthdate }}</td>
-                                                    <td>{{ $cust->phone }}</td>
-                                                </tr>
-                                            @empty
-
-                                            @endforelse
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Province</th>
+                        <th>City</th>
+                        <th>birthdate</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($daftarcustomer as $cust)
+                        <tr>
+                            <td>{{ $cust->id }}</td>
+                            <td>{{ $cust->email }}</td>
+                            <td>{{ $cust->name }}</td>
+                            <td>{{ $cust->password }}</td>
+                            <td>{{ $cust->rbgender }}</td>
+                            <td>{{ $cust->address }}</td>
+                            <td>{{ $cust->province }}</td>
+                            <td>{{ $cust->city }}</td>
+                            <td>{{ $cust->birthdate }}</td>
+                            <td>{{ $cust->phone }}</td>
+                            <td>
+                                <button type="submit"><a href="{{ url("admin/update/user") }}">Edit</a></button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td>Tidak ada data</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </main>
     <script>

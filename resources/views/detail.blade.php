@@ -46,7 +46,7 @@
                         <div class="product-details-content ml-30">
                             <h2>{{ $product->name }}</h2>
                             <div class="product-details-price">
-                                <span>{{ $product->price }}</span>
+                                <span>@currency($product->price)</span>
                             </div>
                             <div class="pro-details-rating-wrap">
                                 <div class="pro-details-rating">

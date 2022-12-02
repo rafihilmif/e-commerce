@@ -15,8 +15,8 @@ class Artist extends Model
 
     protected $fillable = ['id', 'name'];
 
-    // public function Product()
-    // {
-    //     return $this->hasMany(Product::class, 'id', 'id_artist');
-    // }
+    public function Product()
+    {
+        return $this->hasMany(Product::class, 'id', 'id_artist');
+    }
 }

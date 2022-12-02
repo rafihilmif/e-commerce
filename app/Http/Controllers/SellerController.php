@@ -149,16 +149,27 @@ class SellerController extends Controller
     public function productArtist($name)
     {
         $artist = Artist::where('name', $name)->first();
-        $product = Product::where('id_artist', $artist->id)->get();
+        $product = Product::where('id_artist', $artist->id)->paginate(12);
         return view('artist', compact('artist', 'product'));
     }
-    public function productSearch()
+    public function productSearchByCategory(Request $req, $name)
     {
-        $category = Category::select('id')->get();
-        $project = Product::query();
-        if (request('term')) {
-            $project->where('id_category', $category->id)->where('name', 'Like', '%' . request('term') . '%');
+        $category = Category::where('name', $name)->first();
+        $product = Product::where('id_category', $category->id);
+        if ($req->has('term')) {
+            $product = $product->where('name', 'like', "%$req->term%");
         }
-        return $project->orderBy('id', 'DESC')->paginate(10);
+        $product = $product->paginate(12);
+        return view('collection', compact('category', 'product'));
+    }
+    public function productSearchByArtist(Request $req, $name)
+    {
+        $artist = Artist::where('name', $name)->first();
+        $product = Product::where('id_artist', $artist->id);
+        if ($req->has('term')) {
+            $product = $product->where('name', 'like', "%$req->term%");
+        }
+        $product = $product->paginate(12);
+        return view('artist', compact('artist', 'product'));
     }
 }

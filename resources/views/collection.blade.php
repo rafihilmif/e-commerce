@@ -41,10 +41,8 @@
                             <div class="select-shoing-wrap">
                                 <div class="shop-select">
                                     <select>
-                                        <option value="">Sort by newness</option>
-                                        <option value="">A to Z</option>
-                                        <option value=""> Z to A</option>
-                                        <option value="">In stock</option>
+                                        <option value="">ALPHABETICALLY, A TO Z</option>
+                                        <option value="">ALPHABETICALLY, Z TO A</option>
                                     </select>
                                 </div>
                             </div>
@@ -131,7 +129,7 @@
                             <div class="sidebar-widget">
                                 <h4 class="pro-sidebar-title">Search </h4>
                                 <div class="pro-sidebar-search mb-50 mt-25">
-                                    <form class="pro-sidebar-search-form" action="{{ route('search',$category->name) }}" method="GET">
+                                    <form class="pro-sidebar-search-form" action="{{ route('searchByCategory',$category->name) }}" method="GET">
                                         <input type="text" placeholder="Search here..." name='term'>
                                         <button>
                                             <i class="sli sli-magnifier"></i>
@@ -219,22 +217,7 @@
         </div>
         @include('template.footer')
     </div>
-
     </div>
-
-
-
-
-
-
-
-
-
-
-    <!-- All JS is here
-============================================ -->
-
-    <!-- jQuery JS -->
     <script>
         @include('js')
     </script>

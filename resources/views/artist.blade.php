@@ -13,24 +13,6 @@
 <body>
     <div class="wrapper">
         <header>@include('template.header')</header>
-        <div class="mobile-off-canvas-active">
-            <a class="mobile-aside-close"><i class="sli sli-close"></i></a>
-            <div class="header-mobile-aside-wrap">
-                <div class="mobile-search">
-                    <form class="search-form" action="#">
-                        <input type="text" placeholder="Search entire store…">
-                        <button class="button-search"><i class="sli sli-magnifier"></i></button>
-                    </form>
-                </div>
-                <div class="mobile-social-wrap">
-                    <a class="facebook" href="#"><i class="sli sli-social-facebook"></i></a>
-                    <a class="twitter" href="#"><i class="sli sli-social-twitter"></i></a>
-                    <a class="pinterest" href="#"><i class="sli sli-social-pinterest"></i></a>
-                    <a class="instagram" href="#"><i class="sli sli-social-instagram"></i></a>
-                    <a class="google" href="#"><i class="sli sli-social-google"></i></a>
-                </div>
-            </div>
-        </div>
         <div class="shop-area pt-95 pb-100">
             <div class="container">
                 <div class="row flex-row-reverse">
@@ -39,10 +21,8 @@
                             <div class="select-shoing-wrap">
                                 <div class="shop-select">
                                     <select>
-                                        <option value="">Sort by newness</option>
-                                        <option value="">A to Z</option>
-                                        <option value=""> Z to A</option>
-                                        <option value="">In stock</option>
+                                        <option value="">ALPHABETICALLY, A TO Z</option>
+                                        <option value="">ALPHABETICALLY, Z TO A</option>
                                     </select>
                                 </div>
                             </div>
@@ -82,7 +62,7 @@
                                                                         href="product-details.html">{{ $item->name }}</a>
                                                                 </h4>
                                                                 <div class="ht-product-price">
-                                                                    <span class="new">{{ $item->price }}</span>
+                                                                    <span class="new">@currency($item->price)</span>
                                                                 </div>
                                                             </div>
                                                             <div class="ht-product-action">
@@ -119,13 +99,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pro-pagination-style text-center mt-30">
-                                <ul>
-                                    <li><a class="prev" href="#"><i class="sli sli-arrow-left"></i></a></li>
-                                    <li><a class="active" href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a class="next" href="#"><i class="sli sli-arrow-right"></i></a></li>
-                                </ul>
+                           <div class="col-md-12">
+                                {{ $product->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     </div>
@@ -134,8 +109,8 @@
                             <div class="sidebar-widget">
                                 <h4 class="pro-sidebar-title">Search </h4>
                                 <div class="pro-sidebar-search mb-50 mt-25">
-                                    <form class="pro-sidebar-search-form" action="#">
-                                        <input type="text" placeholder="Search here...">
+                                    <form class="pro-sidebar-search-form" action="{{ route('searchByArtist',$artist->name) }}" method="GET">
+                                        <input type="text" placeholder="Search here..." name="term">
                                         <button>
                                             <i class="sli sli-magnifier"></i>
                                         </button>
@@ -212,18 +187,6 @@
                                                 <span class="checkmark"></span>
                                             </div>
                                         </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-widget mt-50">
-                                <h4 class="pro-sidebar-title">Tag </h4>
-                                <div class="sidebar-widget-tag mt-25">
-                                    <ul>
-                                        <li><a href="#">Clothing</a></li>
-                                        <li><a href="#">Accessories</a></li>
-                                        <li><a href="#">For Men</a></li>
-                                        <li><a href="#">Women</a></li>
-                                        <li><a href="#">Fashion</a></li>
                                     </ul>
                                 </div>
                             </div>

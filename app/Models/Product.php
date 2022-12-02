@@ -19,4 +19,8 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'id_category', 'id');
     }
+    public function Artist()
+    {
+        return $this->belongsTo(Artist::class, 'id_artist', 'id');
+    }
 }

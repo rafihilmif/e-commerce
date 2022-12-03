@@ -15,7 +15,7 @@
 
 <body>
     <div class="wrapper">
-        <header>@include('template.header')</header>
+        @include('template.header')
         <div class="product-details-area pt-100 pb-95">
             <div class="container">
                 <div class="row">

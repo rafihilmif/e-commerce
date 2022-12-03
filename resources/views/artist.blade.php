@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <header>@include('template.header')</header>
+        @include('template.header')
         <div class="shop-area pt-95 pb-100">
             <div class="container">
                 <div class="row flex-row-reverse">

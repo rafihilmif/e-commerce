@@ -171,24 +171,43 @@
                                     <p>Your Cart Empty</p>
                                 </div>
                             </div>
-                            <div class="setting-wrap">
-                                <button class="setting-active">
-                                    <i class="sli sli-user"></i>
-                                </button>
-                                <div class="setting-content">
-                                    <ul>
-                                        <li>
-                                            <h4>ACCOUNT</h4>
-                                            <ul>
-                                                <li><a href="{{ route('profile') }}">PROFILE</a></li>
-                                                <li><a href="">WISHLIST</a></li>
-                                                <li><a href="">TRACK ORDER</a></li>
-                                                <li><a href="{{ route('logout') }}">LOG OUT</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                            @if (Auth::check())
+                                <div class="setting-wrap">
+                                    <button class="setting-active">
+                                        <i class="sli sli-user"></i>
+                                    </button>
+                                    <div class="setting-content">
+                                        <ul>
+                                            <li>
+                                                <h4>ACCOUNT</h4>
+                                                <ul>
+                                                    <li><a href="{{ route('profile') }}">PROFILE</a></li>
+                                                    <li><a href="">WISHLIST</a></li>
+                                                    <li><a href="">TRACK ORDER</a></li>
+                                                    <li><a href="{{ route('logout') }}">LOG OUT</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                               <div class="setting-wrap">
+                                    <button class="setting-active">
+                                        <i class="sli sli-user"></i>
+                                    </button>
+                                    <div class="setting-content">
+                                        <ul>
+                                            <li>
+                                                <h4>ACCOUNT</h4>
+                                                <ul>
+                                                    <li><a href="{{ route('login') }}">LOGIN/REGISTER</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

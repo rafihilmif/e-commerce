@@ -42,7 +42,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="{{ route('login') }}" class='sidebar-link'>
+                    <a href="{{ route('logs') }}" class='sidebar-link'>
                         <i class="bi bi-gear"></i>
                         <span>Log Customer</span>
                     </a>

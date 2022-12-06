@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SellerController;
 use App\Models\Customer;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SellerController::class, 'landing'])->name('landing');
 
 Route::get('/login', [CustomerController::class, 'login'])->name('login');
-Route::post('login', [CustomerController::class, 'doLogin'])->name('doLogin');
+Route::post('login', [CustomerController::class, 'doLogin'])->name('doLogin')->middleware('Logging:login');
 
 Route::get('/register', [CustomerController::class, 'doRegister']);
 Route::get('logout', [CustomerController::class, 'logout'])->name('logout');
@@ -37,10 +38,9 @@ Route::get('/contactus', function () {
 });
 
 Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
-Route::get('search/collection/{name}', [SellerController::class, 'productSearchByCategory'])->name('searchByCategory');
-Route::get('search/artist/{name}', [SellerController::class, 'productSearchByArtist'])->name('searchByArtist');
-
+Route::get('search/{name}', [SellerController::class, 'productSearch'])->name('search');
 Route::get('collection/{name}', [SellerController::class, 'productCategory'])->name('collection');
+
 Route::get('artist/{name}', [SellerController::class, 'productArtist'])->name('artists');
 
 Route::group(['prefix' => 'customer',  'middleware' => 'auth'], function () {
@@ -67,6 +67,7 @@ Route::prefix('admin')->group(function () {
         Route::post('add/user', [AdminController::class, 'adduser'])->name('doAddUser');
         Route::get('update/user', [AdminController::class, 'ubah'])->name('ubahUser');
         Route::post('update/user', [AdminController::class, 'doubah'])->name('doUbah');
+        Route::get('logs', [AdminController::class, 'logs'])->name('logs');
     });
 });
 Route::prefix('seller')->group(function () {

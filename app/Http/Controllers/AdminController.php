@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Logging;
 use App\Models\Customer;
+use App\Models\Log;
 use Faker\Core\Uuid as CoreUuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log as FacadesLog;
 use Ramsey\Uuid\Uuid;
 
 class AdminController extends Controller
@@ -81,7 +84,13 @@ class AdminController extends Controller
         $ubahcust->id = Uuid::uuid4()->getHex();
         $res = $ubahcust->save();
         if($res){
-            return redirect("admin/update/user/{{$req->id}}")->with('pesan', 'Berhasil Mengubah Customer');
+            return redirect("admin/update/user/{$req->id}")->with('pesan', 'Berhasil Mengubah Customer');
         }
+    }
+
+    public function logs(Request $req){
+        $logs = Log::all();
+        $param["daftarlogs"] = $logs;
+        return view('admin.logs', $param);
     }
 }

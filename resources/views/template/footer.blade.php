@@ -4,7 +4,7 @@
              <div class="row">
                  <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                      <div class="footer-widget mb-40">
-                         <a href="#"><img alt="" src=""></a>
+                         <a href="#"><img src="{{asset('assets/img/logo/noiseblod.png')}}" alt=""></a>
                          <div class="subscribe-style mt-45">
                              <p>Subscribe to our newsleter, Enter your emil address</p>
                              <div id="mc_embed_signup" class="subscribe-form mt-20">

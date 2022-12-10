@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo pt-40">
-                            <a href="index.html">
-                                <img src="" alt="">
+                            <a href="{{ route('landing') }}">
+                                <img src="{{asset('assets/img/logo/noiseblod.png')}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -14,7 +14,9 @@
                         <div class="main-menu">
                             <nav>
                                 <ul>
+                                    @if (Auth::check())
                                     <li><a href="{{ route('landing') }}">HOME</a></li>
+                                    @endif
                                     <li class="angle-shape"><a href="shop.html">CATEGORIES</a>
                                         <ul class="mega-menu">
                                             <li><a class="menu-title" href="#">APPAREL</a>
@@ -144,6 +146,7 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li><a href="contact-us.html">CONTACT</a></li>
                                     <li><a href="contact-us.html">ABOUT US</a></li>
                                 </ul>
                             </nav>

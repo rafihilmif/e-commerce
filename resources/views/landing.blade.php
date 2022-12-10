@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -9,6 +10,7 @@
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
 </head>
+
 <body>
     <div class="wrapper">
         @include('template.header')
@@ -17,6 +19,7 @@
                 <div class="single-slider slider-height-2 bg-aliceblue">
                     <div class="container">
                         <div class="row">
+
                             <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="slider-content pt-180 slider-animated-1">
                                     <h1 class="animated">MERCHANDISE</h1>
@@ -30,7 +33,8 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="slider-single-img-2 slider-animated-1">
-                                    <img class="animated" src="assets/img/slider/Amenra.jpg" alt="">
+                                    <img class="animated" src="{{ asset('assets/img/slider/Amenra.jpg') }}"
+                                        alt="">
                                 </div>
                             </div>
                         </div>
@@ -52,7 +56,8 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="slider-single-img-2 slider-animated-1">
-                                    <img class="animated" src="assets/img/slider/Masakre-Crawling.jpg" alt="">
+                                    <img class="animated" src="{{ asset('assets/img/slider/Masakre-Crawling.jpg') }}"
+                                        alt="">
                                 </div>
                             </div>
                         </div>
@@ -65,8 +70,8 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated" src="assets/img/banner/longsleeve.jpg"
-                                    alt=""></a>
+                            <a href="product-details.html"><img class="animated"
+                                    src="{{ asset('assets/img/banner/longsleeve.jpg') }}" alt=""></a>
                             <div class="banner-content-2 banner-position-5">
                                 <h4 style="color: white;">APPAREL</h4>
                             </div>
@@ -74,8 +79,8 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated" src="assets/img/banner/vinyl.jpg"
-                                    alt=""></a>
+                            <a href="product-details.html"><img class="animated"
+                                    src="{{ asset('assets/img/banner/vinyl.jpg') }}" alt=""></a>
                             <div class="banner-content-2 banner-position-5">
                                 <h4 style="color: white;">MUSIC</h4>
                             </div>
@@ -83,8 +88,8 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated" src="assets/img/banner/pin.jpg"
-                                    alt=""></a>
+                            <a href="product-details.html"><img class="animated"
+                                    src="{{ asset('assets/img/banner/pin.jpg') }}" alt=""></a>
                             <div class="banner-content-2 banner-position-5">
                                 <h4 style="color: white;">ACCESSORIES</h4>
                             </div>
@@ -92,8 +97,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated" src="assets/img/banner/banner-9.png"
-                                    alt=""></a>
+                            <a href="product-details.html"><img class="animated"
+                                    src="{{ asset('assets/img/banner/banner-9.png') }}" alt=""></a>
                             <div class="banner-content banner-position-6">
                                 <h3>Black Friday</h3>
                                 <h2>Wall Lighting <br>Black.</h2>
@@ -104,7 +109,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="single-banner mb-30 text-center scroll-zoom">
                             <a href="product-details.html"><img class="animated"
-                                    src="assets/img/banner/banner-10.png" alt=""></a>
+                                    src="{{ asset('assets/img/banner/banner-10.png') }}" alt=""></a>
                             <div class="banner-content-3 banner-position-7">
                                 <h2>Wall Lighting Black.</h2>
                                 <a href="product-details.html">Shop Now</a>
@@ -146,7 +151,8 @@
                                     </div>
                                     <div class="ht-product-content">
                                         <div class="ht-product-content-inner">
-                                            <h4 class="ht-product-title"><a href="#">{{ strtoupper($item->name) }}</a>
+                                            <h4 class="ht-product-title"><a
+                                                    href="#">{{ strtoupper($item->name) }}</a>
                                             </h4>
                                             <div class="ht-product-price">
                                                 <span class="new">@currency($item->price)</span>
@@ -186,7 +192,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7 col-sm-7">
                         <div class="banner-img-2 pr-10 scroll-zoom">
-                            <a href="product-details.html"><img src="assets/img/banner/banner-11.png"
+                            <a href="product-details.html"><img src="{{ asset('assets/img/banner/banner-11.png') }}"
                                     alt=""></a>
                         </div>
                     </div>
@@ -207,7 +213,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-4">
                             <div class="single-feature mb-40">
                                 <div class="feature-icon">
-                                    <img src="assets/img/icon-img/free-shipping.png" alt="">
+                                    <img src="{{ asset('assets/img/icon-img/free-shipping.png') }}">
                                 </div>
                                 <div class="feature-content">
                                     <h4>Free Shipping</h4>
@@ -218,7 +224,7 @@
                         <div class="col-xl-5 col-lg-4 col-md-4">
                             <div class="single-feature mb-40 pl-50">
                                 <div class="feature-icon">
-                                    <img src="assets/img/icon-img/support.png" alt="">
+                                    <img src="{{ asset('assets/img/icon-img/support.png') }}">
                                 </div>
                                 <div class="feature-content">
                                     <h4>Customer Support</h4>
@@ -229,7 +235,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-4">
                             <div class="single-feature mb-40">
                                 <div class="feature-icon">
-                                    <img src="assets/img/icon-img/security.png" alt="">
+                                    <img src=" {{asset('assets/img/icon-img/security.png')}}">
                                 </div>
                                 <div class="feature-content">
                                     <h4>Secure Payment</h4>
@@ -252,22 +258,22 @@
             <div class="instagram-feed-thumb">
                 <div class="instagram-carousel owl-carousel">
                     <div class="single-instagram-item">
-                        <a href="#"><img src="assets/img/instagram/instagram-1.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-1.jpg') }}"></a>
                     </div>
                     <div class="single-instagram-item">
-                        <a href="#"><img src="assets/img/instagram/instagram-2.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
                     </div>
                     <div class="single-instagram-item">
-                        <a href="#"><img src="assets/img/instagram/instagram-4.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
                     </div>
                     <div class="single-instagram-item">
-                        <a href="#"><img src="assets/img/instagram/instagram-3.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
                     </div>
                     <div class="single-instagram-item">
-                        <a href="#"><img src="assets/img/instagram/instagram-5.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
                     </div>
                     <div class="single-instagram-item">
-                        <a href="#"><img src="assets/img/instagram/instagram-6.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
                     </div>
                 </div>
             </div>

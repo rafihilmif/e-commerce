@@ -40,6 +40,8 @@ Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name
 Route::get('search/collection/{name}', [SellerController::class, 'productSearchByCategory'])->name('searchByCategory');
 Route::get('search/artist/{name}', [SellerController::class, 'productSearchByArtist'])->name('searchByArtist');
 
+Route::get('filter', [SellerController::class, 'filterByCategory'])->name('filterByCategory');
+
 Route::get('collection/{name}', [SellerController::class, 'productCategory'])->name('collection');
 Route::get('artist/{name}', [SellerController::class, 'productArtist'])->name('artists');
 
@@ -71,9 +73,9 @@ Route::prefix('admin')->group(function () {
 });
 Route::prefix('seller')->group(function () {
     Route::prefix('/')->group(function () {
-        Route::get('home', function () {
-            return view('seller.home');
-        });
+
+        Route::get('dashboard', [SellerController::class, 'dashboard'])->name('dashboard');
+        
         Route::post('add/product', [SellerController::class, 'addProduct'])->name('addProduct');
         Route::get('add/product', [SellerController::class, 'product'])->name('addPro');
 
@@ -92,8 +94,8 @@ Route::prefix('seller')->group(function () {
         Route::post('image/product', [SellerController::class, 'addMultiImage'])->name('addMultiImage');
         Route::get('image/product', [SellerController::class, 'image'])->name('image');
 
-        Route::get('update/product', function () {
-            return view('seller.update');
-        });
+        Route::get('update/product/{product}', [SellerController::class, 'updateProduct'])->name('updateProduct');
+        Route::post("update/product", [SellerController::class, "doUpdateProduct"])->name('doUpdateProduct');
+        Route::get("delete/{id}", [SellerController::class, "deleteProduct"])->name('deleteProduct');
     });
 });

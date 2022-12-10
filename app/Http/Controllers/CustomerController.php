@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -63,8 +64,9 @@ class CustomerController extends Controller
     }
     public function home(Request $req)
     {
+        $product = DB::table('product')->paginate(8);
         if (Auth::check()) {
-            return view('customer/home', ['title' => 'Home']);
+            return view('landing', ['title' => 'Noiseblod'], compact('product'));
         }
     }
     public function profile(Request $req)

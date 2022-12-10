@@ -36,7 +36,7 @@
                                                         <select name="id_product" class="form-control">
                                                             @foreach ($product as $item)
                                                                 <option value="{{ $item->id }}">
-                                                                    {{ ucwords($item->name) }}</option>
+                                                                    {{ strtoupper($item->name) }}</option>
                                                                 </option>
                                                             @endforeach
                                                         </select>

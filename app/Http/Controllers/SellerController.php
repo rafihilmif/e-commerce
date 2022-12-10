@@ -7,10 +7,12 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Product_properties;
 use App\Models\Artist;
+use App\Models\Customer;
 use App\Models\Tag;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Termwind\Components\Dd;
 
 class SellerController extends Controller
 {
@@ -18,6 +20,13 @@ class SellerController extends Controller
     {
         $product = DB::table('product')->paginate(8);
         return view('landing', ['title' => 'Noiseblod'], compact('product'));
+    }
+    public function dashboard()
+    {
+        $customer = DB::table('customer')->get();
+        $customerCount = $customer->count();
+        $product = DB::table('product')->paginate(5);
+        return view('seller.dashboard', ['title' => 'Dashboard'], compact('product', 'customerCount'));
     }
     public function product()
     {
@@ -48,6 +57,13 @@ class SellerController extends Controller
     public function tag()
     {
         return view('seller.tag', ['title' => 'Add Tag']);
+    }
+    public function updateProduct(Product $product)
+    {
+        $category = Category::all()->sortBy('name');;
+        $artist = Artist::all()->sortBy('name');;
+        $tag = Tag::all()->sortBy('name');;
+        return view('seller.update', ['product' => $product, 'title' => $product->name], compact('product', 'category', 'artist', 'tag'));
     }
     public function addProduct(Request $req)
     {
@@ -171,5 +187,47 @@ class SellerController extends Controller
         }
         $product = $product->paginate(12);
         return view('artist', compact('artist', 'product'));
+    }
+    public function doUpdateProduct(Request $req)
+    {
+        $product = Product::find($req->id);
+        if ($req->hasfile('image')) {
+            $file = $req->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('assets/img/upload/product/', $filename);
+            $image = $filename;
+        } else {
+            $filename = 'default.png';
+        }
+        $res = $product->update([
+            'name' => $req->input('name'),
+            'id_artist' => $req->input('id_artist'),
+            'id_category' => $req->input('id_category'),
+            'id_tag' => $req->input('id_tag'),
+            'material' => $req->input('material'),
+            'price' => $req->input('price'),
+            'image' => $image,
+        ]);
+        if ($res) {
+            return redirect()->back()->with("pesanSukses", "Data telah diperbaharui!");
+        } else {
+            return redirect()->back()->with("pesanGagal", "Gagal memperbaharui data!");
+        }
+    }
+    public function deleteProduct(Request $req)
+    {
+        $product = Product::find($req->id);
+        $res = $product->delete();
+
+        if ($res) {
+            return redirect()->back()->with("pesanSukses", "Data telah hapus!");
+        } else {
+            return redirect()->back()->with("pesanGagal", "Gagal menghapus data!");
+        }
+    }
+    public function filterByCategory(Request $req, $name)
+    {
+        return "OK";
     }
 }

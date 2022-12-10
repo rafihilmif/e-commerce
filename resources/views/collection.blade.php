@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,8 +9,10 @@
     <title>{{ strtoupper($category->name) }}</title>
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     @include('customerstyle')
-    <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
+    <script src="{{asset('assets/js/vendor/modernizr-3.11.7.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
 <body>
     <div class="wrapper">
         @include('template.header')
@@ -29,74 +32,83 @@
                         </div>
                         <div class="shop-bottom-area mt-35">
                             <div class="tab-content jump">
-                                <div id="shop-1" class="tab-pane active">
-                                    <div class="row ht-products">
-                                        @foreach ($product as $item)
-                                            <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div
-                                                    class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
-                                                    <div class="ht-product-inner">
-                                                        <div class="ht-product-image-wrap">
-                                                            <a href="{{ route('detail', $item->id) }}"
-                                                                class="ht-product-image">
-                                                                <img src="{{ asset('assets/img/upload/product/' . $item->image) }}"
-                                                                    alt="Universal Product Style"> </a>
-                                                            <div class="ht-product-action">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="sli sli-heart"></i><span
-                                                                                class="ht-product-action-tooltip">Add to
-                                                                                Wishlist</span></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="sli sli-bag"></i><span
-                                                                                class="ht-product-action-tooltip">Add to
-                                                                                Cart</span></a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ht-product-content">
-                                                            <div class="ht-product-content-inner">
-                                                                <div class="ht-product-categories"><a
-                                                                        href="#">{{ $category->name }}</a></div>
-                                                                <h4 class="ht-product-title"><a
-                                                                        href="product-details.html">{{ $item->name }}</a>
-                                                                </h4>
-                                                                <div class="ht-product-price">
-                                                                    <span class="new"> @currency($item->price)</span>
+                                @if ($product->count() >= 1)
+                                    <div id="shop-1" class="tab-pane active">
+                                        <div class="row ht-products">
+                                            @foreach ($product as $item)
+                                                <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
+                                                    <div
+                                                        class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+                                                        <div class="ht-product-inner">
+                                                            <div class="ht-product-image-wrap">
+                                                                <a href="{{ route('detail', $item->id) }}"
+                                                                    class="ht-product-image">
+                                                                    <img src="{{ asset('assets/img/upload/product/' . $item->image) }}"
+                                                                        alt="Universal Product Style"> </a>
+                                                                <div class="ht-product-action">
+                                                                    <ul>
+                                                                        <li><a href="#"><i
+                                                                                    class="sli sli-heart"></i><span
+                                                                                    class="ht-product-action-tooltip">Add
+                                                                                    to
+                                                                                    Wishlist</span></a></li>
+                                                                        <li><a href="#"><i
+                                                                                    class="sli sli-bag"></i><span
+                                                                                    class="ht-product-action-tooltip">Add
+                                                                                    to
+                                                                                    Cart</span></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="ht-product-action">
-                                                                <ul>
-                                                                    <li><a href="#" data-bs-toggle="modal"
-                                                                            data-bs-target="#exampleModal"><i
-                                                                                class="sli sli-magnifier"></i><span
-                                                                                class="ht-product-action-tooltip">Quick
-                                                                                View</span></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="sli sli-heart"></i><span
-                                                                                class="ht-product-action-tooltip">Add
-                                                                                to
-                                                                                Wishlist</span></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="sli sli-bag"></i><span
-                                                                                class="ht-product-action-tooltip">Add
-                                                                                to Cart</span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="ht-product-countdown-wrap">
-                                                                <div class="ht-product-countdown"
-                                                                    data-countdown="2020/01/01"></div>
+                                                            <div class="ht-product-content">
+                                                                <div class="ht-product-content-inner">
+                                                                    <div class="ht-product-categories"><a
+                                                                            href="#">{{ $category->name }}</a>
+                                                                    </div>
+                                                                    <h4 class="ht-product-title"><a
+                                                                            href="product-details.html">{{ $item->name }}</a>
+                                                                    </h4>
+                                                                    <div class="ht-product-price">
+                                                                        <span class="new"> @currency($item->price)</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ht-product-action">
+                                                                    <ul>
+                                                                        <li><a href="#" data-bs-toggle="modal"
+                                                                                data-bs-target="#exampleModal"><i
+                                                                                    class="sli sli-magnifier"></i><span
+                                                                                    class="ht-product-action-tooltip">Quick
+                                                                                    View</span></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i
+                                                                                    class="sli sli-heart"></i><span
+                                                                                    class="ht-product-action-tooltip">Add
+                                                                                    to
+                                                                                    Wishlist</span></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i
+                                                                                    class="sli sli-bag"></i><span
+                                                                                    class="ht-product-action-tooltip">Add
+                                                                                    to Cart</span></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="ht-product-countdown-wrap">
+                                                                    <div class="ht-product-countdown"
+                                                                        data-countdown="2020/01/01"></div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div id="shop-1" class="tab-pane active">
+                                        <p>Sorry, no products matched your selection</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 {{ $product->links('vendor.pagination.bootstrap-5') }}
@@ -109,7 +121,8 @@
                             <div class="sidebar-widget">
                                 <h4 class="pro-sidebar-title">Search </h4>
                                 <div class="pro-sidebar-search mb-50 mt-25">
-                                    <form class="pro-sidebar-search-form" action="{{ route('searchByCategory',$category->name) }}" method="GET">
+                                    <form class="pro-sidebar-search-form"
+                                        action="{{ route('searchByCategory', $category->name) }}" method="GET">
                                         <input type="text" placeholder="Search here..." name='term'>
                                         <button>
                                             <i class="sli sli-magnifier"></i>
@@ -123,21 +136,8 @@
                                     <ul>
                                         <li>
                                             <div class="sidebar-widget-list-left">
-                                                <input type="checkbox"> <a href="#">On Sale <span>4</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
                                                 <input type="checkbox" value=""> <a href="#">New
                                                     <span>5</span></a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">In Stock
-                                                    <span>6</span> </a>
                                                 <span class="checkmark"></span>
                                             </div>
                                         </li>
@@ -148,8 +148,8 @@
                                 <h4 class="pro-sidebar-title">Filter By Price </h4>
                                 <div class="price-filter mt-10">
                                     <div class="price-slider-amount">
-                                        <input type="text" id="amount" name="price"
-                                            placeholder="Add Your Price" />
+                                        <input type="text" id="amount" name="price" placeholder="Add Your Price"
+                                            readonly />
                                     </div>
                                     <div id="slider-range"></div>
                                 </div>
@@ -201,7 +201,64 @@
     <script>
         @include('js')
     </script>
-
+    {{-- <script>
+        var sliderrange = $("#slider-range");
+        var amountprice = $("#amount");
+        $(function() {
+            sliderrange.slider({
+                range: true,
+                min: 750000,
+                max: 1000000,
+                values: [0, 750000],
+                slide: function(event, ui) {
+                    amountprice.val(
+                        "Rp. " + ui.values[0] + " - Rp. " + ui.values[1]
+                    );
+                },
+            });
+            amountprice.val(
+                "Rp. " +
+                sliderrange.slider("values", 0) +
+                " - Rp. " +
+                sliderrange.slider("values", 1)
+            );
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function(e) {
+            var sliderrange = $("#slider-range");
+            var amountprice = $("#amount");
+            $(function() {
+                sliderrange.slider({
+                    range: true,
+                    min: 750000,
+                    max: 1000000,
+                    values: [0, 750000],
+                    slide: function(event, ui) {
+                        amountprice.val(
+                            "Rp. " + ui.values[0] + " - Rp. " + ui.values[1]
+                        );
+                    },
+                });
+                amountprice.val(
+                    "Rp. " +
+                    sliderrange.slider("values", 0) +
+                    " - Rp. " +
+                    sliderrange.slider("values", 1)
+                );
+                let price_1 = sliderrange.slider("values", 0);
+                let price_2 =  sliderrange.slider("values", 1);
+                $.ajax({
+                    url:"{{route('filterByCategory')}}",
+                    method:"GET",
+                    data:{price_1:price_1, price_2:price_2},
+                    success:function(res){
+                        alert();
+                    }
+                });
+            });
+        })
+    </script>
 </body>
 
 </html>

@@ -42,7 +42,7 @@
                                                         <select name="id_artist" class="form-control">
                                                             @foreach ($artist as $item)
                                                                 <option value="{{ $item->id }}">
-                                                                    {{ ucwords($item->name) }}</option>
+                                                                    {{ strtoupper($item->name) }}</option>
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -54,7 +54,7 @@
                                                         <select name="id_category" class="form-control">
                                                             @foreach ($category as $item)
                                                                 <option value="{{ $item->id }}">
-                                                                    {{ ucwords($item->name) }}</option>
+                                                                    {{ strtoupper($item->name) }}</option>
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -65,7 +65,7 @@
                                                         <label for="city-column">Tag</label>
                                                         <select name="tag" class="form-control">
                                                             @foreach ($tag as $item)
-                                                                <option>{{ $item->name }}</option>
+                                                                <option>{{ strtoupper($item->name) }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -74,9 +74,9 @@
                                                     <div class="form-group">
                                                         <label>Material</label>
                                                         <select name="material" class="form-control">
-                                                            <option value="Cotton">Cotton</option>
-                                                            <option value="Polyster">Polyster</option>
-                                                            <option value="Fleece">Fleece</option>
+                                                            <option value="Cotton">COTTON</option>
+                                                            <option value="Polyster">POLYSTER</option>
+                                                            <option value="Fleece">FLEECE</option>
                                                         </select>
                                                     </div>
                                                 </div>

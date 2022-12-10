@@ -12,7 +12,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{route('dashboard')}}" class='sidebar-link'>
                         <i class="bi bi-pc-display-horizontal"></i>
                         <span>Dashboard</span>
                     </a>
@@ -25,16 +25,6 @@
                     <a href="{{route('addProduct')}}" class='sidebar-link'>
                         <i class="bi bi-plus-circle"></i>
                         <span>Add Product</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="sidebar-menu">
-            <ul class="menu">
-                <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
-                        <i class="bi bi-check-circle"></i>
-                        <span>Update Product</span>
                     </a>
                 </li>
             </ul>

@@ -39,7 +39,7 @@
                 </li>
             </ul>
         </div>
-        <div class="sidebar-menu">
+        {{-- <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
                     <a href="{{ route('logs') }}" class='sidebar-link'>
@@ -48,6 +48,6 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </div>
 </div>

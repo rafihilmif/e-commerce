@@ -8,7 +8,6 @@ use App\Models\Log;
 use Faker\Core\Uuid as CoreUuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log as FacadesLog;
 use Ramsey\Uuid\Uuid;
 
 class AdminController extends Controller
@@ -88,9 +87,9 @@ class AdminController extends Controller
         }
     }
 
-    public function logs(Request $req){
-        $logs = Log::all();
-        $param["daftarlogs"] = $logs;
-        return view('admin.logs', $param);
-    }
+    // public function logs(Request $req){
+    //     $logs = Log::all();
+    //     $param["daftarlogs"] = $logs;
+    //     return view('admin.logs', $param);
+    // }
 }

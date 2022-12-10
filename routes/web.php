@@ -3,8 +3,6 @@
     use App\Http\Controllers\AdminController;
     use App\Http\Controllers\CustomerController;
     use App\Http\Controllers\SellerController;
-    use App\Models\Customer;
-    use App\Models\Category;
     use Illuminate\Support\Facades\Route;
 
     /*

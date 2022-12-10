@@ -80,12 +80,16 @@
                                                         <tbody>
                                                             @foreach ($product as $item)
                                                                 <tr>
-                                                                    <td class="text-bold-500">{{ strtoupper($item->name) }}</td>
-                                                                    <td class="text-bold-500">{{ $item->id_artist }}</td>
+                                                                    <td class="text-bold-500">
+                                                                        {{ strtoupper($item->name) }}</td>
+                                                                    <td class="text-bold-500">{{ $item->id_artist }}
+                                                                    </td>
                                                                     <td class="text-bold-500">{{ $item->id_category }}
                                                                     </td>
-                                                                    <td class="text-bold-500">{{ strtoupper($item->tag) }}</td>
-                                                                    <td class="text-bold-500">{{ strtoupper($item->material) }}</td>
+                                                                    <td class="text-bold-500">
+                                                                        {{ strtoupper($item->tag) }}</td>
+                                                                    <td class="text-bold-500">
+                                                                        {{ strtoupper($item->material) }}</td>
                                                                     <td class="text-bold-500">@currency($item->price)</td>
                                                                     <td>
                                                                         <a href="{{ route('updateProduct', $item->id) }}"

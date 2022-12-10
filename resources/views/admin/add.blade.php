@@ -138,46 +138,6 @@
                     </div>
                 </section>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Name</th>
-                        <th>Password</th>
-                        <th>Gender</th>
-                        <th>Address</th>
-                        <th>Province</th>
-                        <th>City</th>
-                        <th>birthdate</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($daftarcustomer as $cust)
-                        <tr>
-                            <td>{{ $cust->id }}</td>
-                            <td>{{ $cust->email }}</td>
-                            <td>{{ $cust->name }}</td>
-                            <td>{{ $cust->password }}</td>
-                            <td>{{ $cust->rbgender }}</td>
-                            <td>{{ $cust->address }}</td>
-                            <td>{{ $cust->province }}</td>
-                            <td>{{ $cust->city }}</td>
-                            <td>{{ $cust->birthdate }}</td>
-                            <td>{{ $cust->phone }}</td>
-                            <td>
-                                <button type="submit"><a href="{{ url("admin/update/user") }}">Edit</a></button>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td>Tidak ada data</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
         </div>
     </main>
     <script>

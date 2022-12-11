@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 09:38 AM
+-- Generation Time: Dec 11, 2022 at 09:44 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -29,6 +29,7 @@ USE `db_noise`;
 -- Table structure for table `artist`
 --
 
+DROP TABLE IF EXISTS `artist`;
 CREATE TABLE `artist` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL
@@ -75,6 +76,7 @@ INSERT INTO `artist` (`id`, `name`) VALUES
 -- Table structure for table `cart`
 --
 
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
@@ -88,6 +90,7 @@ CREATE TABLE `cart` (
 -- Table structure for table `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` varchar(255) NOT NULL,
   `parent` varchar(255) NOT NULL,
@@ -122,6 +125,7 @@ INSERT INTO `category` (`id`, `parent`, `name`) VALUES
 -- Table structure for table `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -176,6 +180,7 @@ INSERT INTO `customer` (`id`, `email`, `name`, `password`, `gender`, `address`, 
 -- Table structure for table `detail_order`
 --
 
+DROP TABLE IF EXISTS `detail_order`;
 CREATE TABLE `detail_order` (
   `id` int(11) NOT NULL,
   `id_customer` int(11) NOT NULL,
@@ -189,6 +194,7 @@ CREATE TABLE `detail_order` (
 -- Table structure for table `image`
 --
 
+DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` varchar(255) NOT NULL,
   `id_product` varchar(255) NOT NULL,
@@ -214,6 +220,7 @@ INSERT INTO `image` (`id`, `id_product`, `path`) VALUES
 -- Table structure for table `order_produk`
 --
 
+DROP TABLE IF EXISTS `order_produk`;
 CREATE TABLE `order_produk` (
   `id` int(4) NOT NULL,
   `id_customer` int(4) NOT NULL,
@@ -229,6 +236,7 @@ CREATE TABLE `order_produk` (
 -- Table structure for table `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` varchar(255) NOT NULL,
   `id_category` varchar(255) DEFAULT NULL,
@@ -265,6 +273,7 @@ INSERT INTO `product` (`id`, `id_category`, `id_artist`, `tag`, `name`, `materia
 -- Table structure for table `product_properties`
 --
 
+DROP TABLE IF EXISTS `product_properties`;
 CREATE TABLE `product_properties` (
   `id` varchar(255) NOT NULL,
   `id_product` varchar(255) NOT NULL,
@@ -320,6 +329,7 @@ INSERT INTO `product_properties` (`id`, `id_product`, `size`, `stock`) VALUES
 -- Table structure for table `tag`
 --
 
+DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL

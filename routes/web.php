@@ -46,18 +46,16 @@
     Route::group(['prefix' => 'customer',  'middleware' => 'auth'], function () {
         Route::prefix('/')->group(function () {
             Route::get('home', [CustomerController::class, 'home'])->name('home');
-            Route::get('cart', function () {
-                return view('customer.cart');
-            });
-
-            Route::get('checkout', function () {
-                return view('customer.checkout');
-            });
-            Route::get('wishlist', function () {
-                return view('customer.wishlist');
-            });
+            Route::get('cart', [CustomerController::class, 'cart'])->name('cart');
+            Route::get('checkout', [CustomerController::class, 'checkout'])->name('checkout');
+            Route::get('wishlist', [CustomerController::class, 'wishlist'])->name('wishlist');
             Route::get('profile', [CustomerController::class, 'profile'])->name('profile');
             Route::post('profile', [CustomerController::class, 'doUpdateProfile'])->name('update');
+
+            Route::post('cart', [CustomerController::class, 'addToCart'])->name('addToCart');
+            Route::get('cart/remove/{id}', [CustomerController::class, 'removeCart'])->name('removeCart');
+            Route::get('cart/remove', [CustomerController::class, 'removeAllCart'])->name('removeAllCart');
+            Route::get('wishlist/{product}', [CustomerController::class, 'addToWishlist'])->name('addToWishlist');
         });
     });
     Route::prefix('admin')->group(function () {

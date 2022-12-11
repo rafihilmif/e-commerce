@@ -24,9 +24,8 @@
                 </form>
             </div>
             <div class="mobile-menu-wrap">
-               
+
                 <div class="mobile-navigation">
-                
                     <nav>
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children"><a href="index.html">Home</a>
@@ -93,9 +92,9 @@
                             <li><a href="contact-us.html">Contact us</a></li>
                         </ul>
                     </nav>
-                    
+
                 </div>
-                
+
             </div>
             <div class="mobile-curr-lang-wrap">
                 <div class="single-mobile-curr-lang">
@@ -170,57 +169,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($carts as $cart)
                                     <tr>
+                                        <?php
+                                        $product = DB::table('product')->where('id', $cart->id_product)->first();
+                                        ?>
                                         <td class="product-thumbnail">
-                                            <a href="#"><img src="assets/img/cart/cart-3.svg" alt=""></a>
+                                            <a href="#"><img style="width: 100px; height: 100px;" src="{{ asset('assets/img/upload/product/' . $cart->image) }}" alt="cart product imager"></a>
                                         </td>
-                                        <td class="product-name"><a href="#">Product Name</a></td>
-                                        <td class="product-price-cart"><span class="amount">$260.00</span></td>
+                                        <td class="product-name"><a href="#">{{ $cart->name }}</a></td>
+                                        <td class="product-price-cart"><span class="amount">@currency($product->price)</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
+                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" id="qtybutton" value="{{ $cart->qty }}" onclick="klik('{{ $cart->id }}')">
                                             </div>
                                         </td>
-                                        <td class="product-subtotal">$110.00</td>
+                                        <td class="product-subtotal">@currency($product->price * $cart->qty)</td>
                                         <td class="product-remove">
-                                            <a href="#"><i class="sli sli-pencil"></i></a>
-                                            <a href="#"><i class="sli sli-close"></i></a>
+                                            <a href="{{ route('removeCart', $cart->id_product) }}"><i class="sli sli-close"></i></a>
                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img src="assets/img/cart/cart-4.svg" alt=""></a>
-                                        </td>
-                                        <td class="product-name"><a href="#">Product Name</a></td>
-                                        <td class="product-price-cart"><span class="amount">$150.00</span></td>
-                                        <td class="product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">$150.00</td>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="sli sli-pencil"></i></a>
-                                            <a href="#"><i class="sli sli-close"></i></a>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img src="assets/img/cart/cart-5.svg" alt=""></a>
-                                        </td>
-                                        <td class="product-name"><a href="#">Product Name </a></td>
-                                        <td class="product-price-cart"><span class="amount">$170.00</span></td>
-                                        <td class="product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">$170.00</td>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="sli sli-pencil"></i></a>
-                                            <a href="#"><i class="sli sli-close"></i></a>
-                                       </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -228,11 +197,11 @@
                             <div class="col-lg-12">
                                 <div class="cart-shiping-update-wrapper">
                                     <div class="cart-shiping-update">
-                                        <a href="#">Continue Shopping</a>
+                                        <a href="{{ route('landing') }}">Continue Shopping</a>
                                     </div>
                                     <div class="cart-clear">
                                         <button>Update Shopping Cart</button>
-                                        <a href="#">Clear Shopping Cart</a>
+                                        <a href="{{ route('removeAllCart') }}">Clear Shopping Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +254,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="discount-code-wrapper">
                                 <div class="title-wrap">
-                                   <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4> 
+                                   <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
                                 </div>
                                 <div class="discount-code">
                                     <p>Enter your coupon code if you have one.</p>
@@ -321,7 +290,20 @@
     <footer>@include('template.footer')</footer>
 </div>
 
-<script>@include('js')</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $(".cart-plus-minus").click(function(){
+        alert(this.id);
+    });
+
+
+    function klik(id) {
+        alert(id);
+    }
+</script>
+<script>
+@include('js')
+</script>
 
 </body>
 

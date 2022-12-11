@@ -23,4 +23,9 @@ class Product extends Model
     {
         return $this->belongsTo(Artist::class, 'id_artist', 'id');
     }
+
+    public function Cart()
+    {
+        return $this->hasMany(Cart::class, 'id', 'id_Product');
+    }
 }

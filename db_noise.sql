@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 09:44 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 11, 2022 at 06:03 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78,11 +78,21 @@ INSERT INTO `artist` (`id`, `name`) VALUES
 
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
-  `id` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `id_customer` varchar(255) NOT NULL,
+  `id_product` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `qty` int(11) NOT NULL
+  `qty` int(11) NOT NULL,
+  `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `id_customer`, `id_product`, `name`, `qty`, `image`) VALUES
+('CA2022-12-11 16:30:440002', '11', 'ITM-00007', 'POWER TRIP \"FIRING SQUAD\" T-SHIRT', 3, '1670082951.jpg'),
+('CA2022-12-11 16:31:240002', '11', 'ITM-00005', 'AMENRA \"BRANCA\" LONGSLEEVE', 2, '1670082134.jpg');
 
 -- --------------------------------------------------------
 
@@ -410,12 +420,6 @@ ALTER TABLE `tag`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_produk`

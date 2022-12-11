@@ -17,7 +17,7 @@
                                     @if (Auth::check())
                                     <li><a href="{{ route('landing') }}">HOME</a></li>
                                     @endif
-                                    <li class="angle-shape"><a href="shop.html">CATEGORIES</a>
+                                    <li class="angle-shape"><a href="#">CATEGORIES</a>
                                         <ul class="mega-menu">
                                             <li><a class="menu-title" href="#">APPAREL</a>
                                                 <ul>
@@ -60,8 +60,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="angle-shape"><a href="shop.html">ARTIST
-                                            STORES</a>
+                                    <li class="angle-shape"><a href="#">ARTIST
+                                            STORES
                                         <ul class="mega-menu">
                                             <li><a class="menu-title" href="#">ARTIST (A-E)</a>
                                                 <ul>
@@ -146,8 +146,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="contact-us.html">CONTACT</a></li>
-                                    <li><a href="contact-us.html">ABOUT US</a></li>
+                                    <li><a href="#">CONTACT</a></li>
+                                    <li><a href="#">ABOUT US</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -157,11 +157,14 @@
                             <div class="header-search">
                                 <a class="search-active" href="#"><i class="sli sli-magnifier"></i></a>
                             </div>
+                            <?php
+                                $cart = DB::table('cart')->where('id_customer', Auth::id())->get();
+                            ?>
                             <div class="cart-wrap">
                                 <button class="icon-cart-active">
                                     <span class="icon-cart">
                                         <i class="sli sli-bag"></i>
-                                        <span class="count-style">0</span>
+                                        <span class="count-style">{{ count($cart) }}</span>
                                     </span>
                                     <span class="cart-price">
                                     </span>
@@ -171,9 +174,26 @@
                                         <h4>Shoping Cart</h4>
                                         <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
                                     </div>
-                                    <p>Your Cart Empty</p>
+                                    @if (count($cart) < 1)
+                                        <p>Your Cart Empty</p>
+                                    @else
+                                        @foreach ($cart as $c)
+                                        <div class="row">
+                                            <div class="col-sm-4"><img style="width: 50px; height: 50px;" src="{{ asset('assets/img/upload/product/' . $c->image) }}" alt="cart product imager"></div>
+                                            <div class="col-sm-8">
+                                                <h6 class="card-title">{{ $c->name }}</h6>
+                                                <p class="card-text">{{ $c->qty }} item</p>
+                                            </div>
+                                        </div> <hr>
+                                        @endforeach
+
+                                        <div class="section-title text-center pb-60">
+                                            <a href="{{ route('cart') }}">View All Cart</a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
+
                             @if (Auth::check())
                                 <div class="setting-wrap">
                                     <button class="setting-active">
@@ -185,7 +205,7 @@
                                                 <h4>ACCOUNT</h4>
                                                 <ul>
                                                     <li><a href="{{ route('profile') }}">PROFILE</a></li>
-                                                    <li><a href="">WISHLIST</a></li>
+                                                    <li><a href="{{ route('wishlist') }}">WISHLIST</a></li>
                                                     <li><a href="">TRACK ORDER</a></li>
                                                     <li><a href="{{ route('logout') }}">LOG OUT</a></li>
                                                 </ul>

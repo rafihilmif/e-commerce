@@ -22,4 +22,9 @@ class Customer extends Model
 
         return parent::save($options);
     }
+
+    public function Cart()
+    {
+        return $this->hasMany(Cart::class, 'id', 'id_Product');
+    }
 }

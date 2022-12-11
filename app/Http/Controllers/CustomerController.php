@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
+use App\Models\Product;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +69,7 @@ class CustomerController extends Controller
     public function home(Request $req)
     {
         $product = DB::table('product')->paginate(8);
+
         if (Auth::check()) {
             return view('landing', ['title' => 'Noiseblod'], compact('product'));
         }
@@ -109,5 +114,63 @@ class CustomerController extends Controller
         $req->session()->invalidate();
         $req->session()->regenerateToken();
         return redirect('/login');
+    }
+
+    public function cart(Request $req)
+    {
+        $carts = Cart::where('id_customer', Auth::id())->get();
+        return view('customer/cart', ['title' => 'cart'], compact('carts'));
+    }
+    public function addToCart(Request $req)
+    {
+        $product_id = $req->input("product_id");
+        $qty = $req->input("qtybutton");
+
+        $product = Product::find($product_id);
+
+        $index = Cart::all()->count()+1;
+        $nameid = "CA" . Carbon::now()->toDateTimeString() . str_pad($index,4,"0",STR_PAD_LEFT);
+
+        $cart = new Cart;
+        $cart->id = $nameid;
+        $cart->id_customer = Auth::id();
+        $cart->id_product = $product->id;
+        $cart->name = $product->name;
+        $cart->qty = $qty;
+        $cart->image = $product->image;
+        $saved = $cart->save();
+
+        return back();
+    }
+    public function updateCart(Request $req)
+    {
+        $carts = Cart::where('id_customer', Auth::id())->get();
+        return view('customer/cart', ['title' => 'cart'], compact('carts'));
+    }
+    public function removeCart($id)
+    {
+        Cart::where('id_customer', Auth::id())->where('id_product', $id)->delete();
+        return back();
+    }
+    public function removeAllCart(Request $req)
+    {
+        Cart::where('id_customer', Auth::id())->delete();
+        return back();
+    }
+
+    public function checkout(Request $req)
+    {
+        return view('customer/checkout', ['title' => 'checkout']);
+    }
+
+    public function wishlist(Request $req)
+    {
+        if (Auth::check()) {
+            return view('customer/wishlist', ['title' => 'wishlist']);
+        }
+    }
+    public function addToWishlist(Product $product)
+    {
+        return back();
     }
 }

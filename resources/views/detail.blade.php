@@ -79,17 +79,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pro-details-quality">
-                                <div class="cart-plus-minus">
-                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
+                            <form action="{{ route('addToCart') }}" style="display: inline-block;" method="post">
+                                @csrf
+                                <div class="pro-details-quality">
+                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" id="qtybutton" value="1">
+                                    </div>
+                                    <div class="pro-details-cart btn-hover">
+                                        <a href="#"><button type="submit" style="background:none;
+                                            border:none;
+                                            margin:0;
+                                            padding:0;
+                                            color:white;
+                                            cursor: pointer;">Add To Cart</button></a>
+                                    </div>
+                                    <div class="pro-details-wishlist">
+                                        <a title="Add To Wishlist" href="{{ route('addToWishlist', $product) }}"><i class="sli sli-heart"></i></a>
+                                    </div>
                                 </div>
-                                <div class="pro-details-cart btn-hover">
-                                    <a href="#">Add To Cart</a>
-                                </div>
-                                <div class="pro-details-wishlist">
-                                    <a title="Add To Wishlist" href="#"><i class="sli sli-heart"></i></a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

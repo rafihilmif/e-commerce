@@ -65,6 +65,7 @@
             Route::post('add/user', [AdminController::class, 'adduser'])->name('doAddUser');
             Route::get('update/user', [AdminController::class, 'ubah'])->name('ubahUser');
             Route::post('update/user', [AdminController::class, 'doubah'])->name('doUbah');
+            Route::get('home/{id}', [AdminController::class, 'doHapus'])->name('doHapus');
         });
     });
     Route::prefix('seller')->group(function () {

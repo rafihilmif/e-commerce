@@ -9,32 +9,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
-    <script>
-        var citiesByProvince = {
-            EastJava: ["Bhubaneswar", "Puri", "Cuttack"],
-            CentralJava: ["Mumbai", "Pune", "Nagpur"],
-            WestJava: ["kochi", "Kanpur"]
+    <script type="text/javascript">
+        var citiesByState = {
+            EastJava: ["Babat", "Balung", "Bangil", "Bangkalan", "Banyuwangi", "Batu", "Blitar", "Bojonegoro",
+                "Bondowoso", "Jember", "Jombang", "Kediri", "Lamongan", "Lumajang", "Madiun", "Magetan", "Malang",
+                "Mojokerto", "Nganjuk", "Ngawi", "Pacitan", "Pamekasan", "Pasuruan", " Ponorogo", "Probolinggo",
+                "Sidoarjo", "Situbondo", "Sumenep", "Trenggalek", "Tuban", "Tulungagung", "Surabaya"
+            ],
+            CentralJava: ["Adiwerna", "Ambarawa", "Banyumas", "Batang", "Baturaden", "Blora", "Boyolali", "Prambanan",
+                "Ceper", "Cepi", "Colomadu", "Delanggu", "Gatak", "Gebog", "Grogol", "Gombong", "Kartasura",
+                "Magelang", "Magelang", "Salatiga", "Semarang", "Surakarta", "Tegal", "Kudus", "Lebaksiu",
+                "Rembang", "Purwokerto", "Wonosobo"
+            ],
+            WestJava: ["Bandung", "Banjar", "Banjaran", "Bekasi", "Bogor", "Caringin", "Ciamis", "Ciampea",
+                "Cibinong", "Cicurug", "Cikampek", "Cikarang", "Cileungsir", "Cirebon", "Garut", "Indramayu",
+                "Majalengka", "Depok", "Sukabumi", "Tasikmalaya", "Kresek", "Margahayukencana",
+                "Padalarang", "Pamulang", "Rengasdengklok", "Purwakarta", "Serpong", "Soreang", "Sumedang"
+            ],
+            EastKalimantan: ["Balikpapan", "Bontang", "Berau", "Kutai", "Kutai Kartanegara", "Mahakam Hulu", "Paser",
+                "Balikpapan", "Samarinda", "Loa Janan"
+            ],
+            CentralKalimantan: ["Barito", "Gunung Mas", "Kapuas", "Katingan", "Kotawaringin", "Lamandau", "Murung Raya",
+                "Pulang Pisau", "Seruyan", "Sukamara", "Palangka Raya", "Kualapuas", "Palangkaraya", "Pangkalbuun",
+                "Sampit"
+            ],
+            SouthSulawesi: ["Galesong", "Banteng", "Barru", "Bone", "Bulukumba", "Enrekang", "Gowa", "Jeneponto",
+                "Luwu", "Maros", "Pinrang", "Sidenreng Rappang", "Sinjai", "Soppeng", "Takalar", "Tana Toraja",
+                "Wajo", "Makassar", "Maros", "Palopo", "Pare-Pare", "Rantepao", "Selayar", "Watampone"
+            ],
+            SoutheastSulawesi: ["Bombana", "Buton", "Kolaka", "Konawe", "Muna", "Katabu", "Kendari", "Bau-Bau",
+                "Wakatobi"
+            ],
+            CentralSulawesi: ["Banggi", "Buol", "Donggala", "Morowali", "Parigi Muotong", "Poso", "Sigi", "Toli-Toli",
+                "Palu", "Luwuk", "Morowali", "Poso", "Tojo Una-Una"
+            ],
+            NorthSulawesi: ["Bolang Mongondow", "Sangihe", "Minahasa", "Siau Tagulandan Biaro", "Bitung", "Kotamobagu",
+                "Manado", "Tomohon", "Tondano"
+            ],
+            SouthSumatra: ["Baturaja", "Empat Lawang", "Musi", "Ogan Ilir", "Ogan Komering Ulu",
+                "Penukal Abab Lematang Ilir", "Lubuklinggau", "Pagar Alam", "Palembang", "Prambulih", "Lahat",
+                "Tanjugagung"
+            ]
+            WestSumatra: ["Bukit Tinggi", "Agam", "Dharmasraya", "Mentawai", "Lima Puluh", "Pasaman", "Pesisir",
+                'Sijunjung', "Solok", "Tanah Datar", "Padang", "Pariaman"
+            ]
         }
 
         function makeSubmenu(value) {
             if (value.length == 0) document.getElementById("citySelect").innerHTML = "<option></option>";
             else {
                 var citiesOptions = "";
-                for (cityId in citiesByProvince[value]) {
-                    citiesOptions += "<option>" + citiesByProvince[value][cityId] + "</option>";
+                for (cityId in citiesByState[value]) {
+                    citiesOptions += "<option>" + citiesByState[value][cityId] + "</option>";
                 }
                 document.getElementById("citySelect").innerHTML = citiesOptions;
             }
         }
 
+        function displaySelected() {
+            var country = document.getElementById("countrySelect").value;
+            var city = document.getElementById("citySelect").value;
+            alert(country + "\n" + city);
+        }
+
         function resetSelection() {
-            document.getElementById("provinceSelect").selectedIndex = 0;
+            document.getElementById("countrySelect").selectedIndex = 0;
             document.getElementById("citySelect").selectedIndex = 0;
         }
     </script>
 </head>
 
-<body >
+<body>
     <div class="wrapper">
         @include('template.header')
         <div class="login-register-area pt-100 pb-100">
@@ -119,20 +164,25 @@
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="billing-select  mb-20">
-                                                        <select id="provinceSelect" size="1"
+                                                        <select id="countrySelect" size="1"
                                                             onchange="makeSubmenu(this.value)" name="province">
                                                             <option disabled selected>Select a Provice</option>
-                                                            <option value="East Java">East Java</option>
-                                                            <option value="Central Java">Central Java</option>
-                                                            <option value="West Java">West Java</option>
+                                                            <option>EastJava</option>
+                                                            <option>CentralJava</option>
+                                                            <option>WestJava</option>
+                                                            <option>EastKalimantan</option>
+                                                            <option>CentralKalimantan</option>
+                                                            <option>SouthSulawesi</option>
+                                                            <option>SoutheastSulawesi</option>
+                                                            <option>CentralSulawesi</option>
+                                                            <option>NorthSulawesi</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="billing-select  mb-20">
-                                                        <select id="citySelect" size="1" onload="resetSelection()"
-                                                            name="city">
-                                                            <option disabled selected>Select City</option>
+                                                        <select id="citySelect" size="1" name="city">
+                                                            <option disabled selected>Select a City</option>
                                                             <option></option>
                                                         </select>
                                                     </div>

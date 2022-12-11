@@ -96,7 +96,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('addUser') }}" method="POST"
+                                        <form class="form" action="{{ route('doAddUser') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">

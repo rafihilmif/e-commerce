@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
-    <script type="text/javascript">
+    <script>
         var citiesByProvince = {
             EastJava: ["Bhubaneswar", "Puri", "Cuttack"],
             CentralJava: ["Mumbai", "Pune", "Nagpur"],
@@ -34,7 +34,7 @@
     </script>
 </head>
 
-<body>
+<body >
     <div class="wrapper">
         @include('template.header')
         <div class="login-register-area pt-100 pb-100">
@@ -76,7 +76,7 @@
                                                 </div>
                                                 <button style="width: 100%;" type="submit"
                                                     class="btn btn-primary btn-lg btn-block">LOGIN</button>
-                                                </form>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -121,8 +121,8 @@
                                                     <div class="billing-select  mb-20">
                                                         <select id="provinceSelect" size="1"
                                                             onchange="makeSubmenu(this.value)" name="province">
-                                                            <option  disabled selected>Select a Provice</option>
-                                                            <option value="East Java">EastJava</option>
+                                                            <option disabled selected>Select a Provice</option>
+                                                            <option value="East Java">East Java</option>
                                                             <option value="Central Java">Central Java</option>
                                                             <option value="West Java">West Java</option>
                                                         </select>
@@ -130,8 +130,8 @@
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="billing-select  mb-20">
-                                                        <select id="citySelect" size="1"
-                                                             onload="resetSelection()" name="city">
+                                                        <select id="citySelect" size="1" onload="resetSelection()"
+                                                            name="city">
                                                             <option disabled selected>Select City</option>
                                                             <option></option>
                                                         </select>

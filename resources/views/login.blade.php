@@ -49,7 +49,7 @@
             SouthSumatra: ["Baturaja", "Empat Lawang", "Musi", "Ogan Ilir", "Ogan Komering Ulu",
                 "Penukal Abab Lematang Ilir", "Lubuklinggau", "Pagar Alam", "Palembang", "Prambulih", "Lahat",
                 "Tanjugagung"
-            ]
+            ],
             WestSumatra: ["Bukit Tinggi", "Agam", "Dharmasraya", "Mentawai", "Lima Puluh", "Pasaman", "Pesisir",
                 'Sijunjung', "Solok", "Tanah Datar", "Padang", "Pariaman"
             ]

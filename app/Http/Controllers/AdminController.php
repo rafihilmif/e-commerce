@@ -40,7 +40,7 @@ class AdminController extends Controller
             'email' => $req->email,
             'name' => $req->name,
             'password' => Hash::make($req->password),
-            'gender' => $req->rbgender,
+            'gender' => $req->gender,
             'address' => $req->address,
             'province' => $req->provinsi,
             'city' => $req->city,

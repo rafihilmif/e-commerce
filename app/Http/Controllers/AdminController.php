@@ -13,7 +13,9 @@ use Ramsey\Uuid\Uuid;
 class AdminController extends Controller
 {
     public function home(Request $req){
-        return view('admin.home');
+        $customer = Customer::all();
+        $param["daftarcustomer"] = $customer;
+        return view('admin.home', $param);
     }
 
     public function add(Request $req){
@@ -52,10 +54,11 @@ class AdminController extends Controller
         }
     }
 
-    public function ubah(Request $req){
+    public function ubah(Customer $cust, Request $req){
         $customer = Customer::all()->find($req->id);
         $param["daftarcustomer"] = $customer;
-        return view('admin.update');
+        $param["customer"] = $cust;
+        return view('admin.update', $param);
     }
 
     public function doubah(Request $req){
@@ -75,7 +78,7 @@ class AdminController extends Controller
         $ubahcust->email = $req->email;
         $ubahcust->name = $req->name;
         $ubahcust->password = $req->password;
-        $ubahcust->gender = $req->rbgender;
+        $ubahcust->gender = $req->gender;
         $ubahcust->province = $req->provinsi;
         $ubahcust->city = $req->city;
         $ubahcust->birthdate = $req->birthdate;
@@ -83,10 +86,17 @@ class AdminController extends Controller
         $ubahcust->id = Uuid::uuid4()->getHex();
         $res = $ubahcust->save();
         if($res){
-            return redirect("admin/update/user/{$req->id}")->with('pesan', 'Berhasil Mengubah Customer');
+            return redirect()->back()->with('pesanSukses', 'Berhasil Mengubah Customer');
         }
     }
 
+    public function doHapus(Request $req){
+        $customer = Customer::find($req->id);
+        $res = $customer->delete();
+        if($res){
+            return redirect()->back()->with('pesanGagal', 'Data Berhasil dihapus');
+        }
+    }
     // public function logs(Request $req){
     //     $logs = Log::all();
     //     $param["daftarlogs"] = $logs;

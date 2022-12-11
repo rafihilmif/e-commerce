@@ -176,6 +176,8 @@
                                                             <option>SoutheastSulawesi</option>
                                                             <option>CentralSulawesi</option>
                                                             <option>NorthSulawesi</option>
+                                                            <option>SouthSumatra</option>
+                                                            <option>WestSumatra</option>
                                                         </select>
                                                     </div>
                                                 </div>

@@ -45,55 +45,43 @@
                             <div class="billing-info-wrap mr-50">
                                 <h3>Billing Details</h3>
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-12">
                                         <div class="billing-info mb-20">
-                                            <label>First Name <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="billing-info mb-20">
-                                            <label>Last Name <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text">
+                                            <label>Name <abbr class="required" title="required">*</abbr></label>
+                                            <input type="text" value="{{ucfirst(Auth()->user()->name)}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="billing-info mb-20">
-                                            <label>Company Name <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text">
+                                        <div class="billing-select mb-20">
+                                            <label>Province <abbr class="required" title="required">*</abbr></label>
+                                            <select>
+                                                <option>Select a province</option>
+                                                <option>Azerbaijan</option>
+                                                <option>Bahamas</option>
+                                                <option>Bahrain</option>
+                                                <option>Bangladesh</option>
+                                                <option>Barbados</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="billing-select mb-20">
+                                            <label>City <abbr class="required" title="required">*</abbr></label>
+                                            <select>
+                                                <option>Select a city</option>
+                                                <option>Azerbaijan</option>
+                                                <option>Bahamas</option>
+                                                <option>Bahrain</option>
+                                                <option>Bangladesh</option>
+                                                <option>Barbados</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="billing-info mb-20">
                                             <label>Address <abbr class="required" title="required">*</abbr></label>
                                             <input class="billing-address" placeholder="House number and street name"
-                                                type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="billing-select mb-20">
-                                            <label>Country <abbr class="required" title="required">*</abbr></label>
-                                            <select>
-                                                <option>Select a country</option>
-                                                <option>Azerbaijan</option>
-                                                <option>Bahamas</option>
-                                                <option>Bahrain</option>
-                                                <option>Bangladesh</option>
-                                                <option>Barbados</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="billing-select mb-20">
-                                            <label>Country <abbr class="required" title="required">*</abbr></label>
-                                            <select>
-                                                <option>Select a country</option>
-                                                <option>Azerbaijan</option>
-                                                <option>Bahamas</option>
-                                                <option>Bahrain</option>
-                                                <option>Bangladesh</option>
-                                                <option>Barbados</option>
-                                            </select>
+                                                type="text" value="{{ucfirst(Auth()->user()->address)}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
@@ -106,7 +94,7 @@
                                     <div class="col-lg-12 col-md-12">
                                         <div class="billing-info mb-20">
                                             <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text">
+                                            <input type="text"  value="{{Auth()->user()->phone}}">
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +106,11 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="your-order-area">
+                                <?php
+                                    $total = 0;
+                                    $subtotal = 0;
+                                    $item = 0;
+                                ?>
                                 <h3>Your order</h3>
                                 <div class="your-order-wrap gray-bg-4">
                                     <div class="your-order-info-wrap">
@@ -128,13 +121,19 @@
                                         </div>
                                         <div class="your-order-middle">
                                             <ul>
-                                                <li>Product Name X 1 <span>$329 </span></li>
-                                                <li>Product Name X 1 <span>$329 </span></li>
+                                                @foreach ($carts as $cart)
+                                                <?php
+                                                    $product = DB::table('product')->where('id', $cart->id_product)->first();
+                                                    $subtotal += $product->price * $cart->qty;
+                                                    $item += $cart->qty;
+                                                ?>
+                                                <li>{{ $cart->name }} X {{ $cart->qty }} <span>@currency($product->price * $cart->qty)</span></li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                         <div class="your-order-info order-subtotal">
                                             <ul>
-                                                <li>Subtotal <span>$329 </span></li>
+                                                <li>Subtotal <span>@currency($subtotal)</span></li>
                                             </ul>
                                         </div>
                                         <div class="your-order-info order-shipping">

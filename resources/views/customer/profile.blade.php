@@ -160,15 +160,18 @@
                                                         </div>
                                                         <div class="single-input-item">
                                                             <label for="display-name" class="required">Name</label>
-                                                            <input type="text" id="display-name" name="name" />
+                                                            <input type="text" id="display-name" name="name"
+                                                            value="{{ucfirst(Auth()->user()->name)}}" />
                                                         </div>
                                                         <div class="single-input-item">
                                                             <label for="display-name" class="required">Address</label>
-                                                            <input type="text" id="display-name" name="address" />
+                                                            <input type="text" id="display-name" name="address"
+                                                            value="{{ucfirst(Auth()->user()->address)}}" />
                                                         </div>
                                                         <div class="single-input-item">
                                                             <label for="display-name" class="required">Phone</label>
-                                                            <input type="text" id="display-name" name="phone" />
+                                                            <input type="text" id="display-name" name="phone"
+                                                            value="{{ucfirst(Auth()->user()->phone)}}" />
                                                         </div>
                                                         <div class="single-input-item">
                                                             <label for="display-name" class="required">Gender</label>

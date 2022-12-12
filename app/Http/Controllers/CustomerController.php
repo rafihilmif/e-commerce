@@ -168,7 +168,8 @@ class CustomerController extends Controller
 
     public function checkout(Request $req)
     {
-        return view('customer/checkout', ['title' => 'checkout']);
+        $carts = Cart::where('id_customer', Auth::id())->get();
+        return view('customer/checkout', ['title' => 'checkout'], compact('carts'));
     }
 
     public function wishlist(Request $req)

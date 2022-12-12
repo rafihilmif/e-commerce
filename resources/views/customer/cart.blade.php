@@ -9,12 +9,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
 <div class="wrapper">
     <header>@include('template.header')</header>
-    <div class="mobile-off-canvas-active">
+    {{-- <div class="mobile-off-canvas-active">
         <a class="mobile-aside-close"><i class="sli sli-close"></i></a>
         <div class="header-mobile-aside-wrap">
             <div class="mobile-search">
@@ -137,7 +138,7 @@
                 <a class="google" href="#"><i class="sli sli-social-google"></i></a>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="breadcrumb-area pt-35 pb-35 bg-gray">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -154,7 +155,11 @@
         <div class="container">
             <h3 class="cart-page-title">Your cart items</h3>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <?php
+                    $total = 0;
+                    $item = 0;
+                ?>
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12">
                     <form action="#">
                         <div class="table-content table-responsive cart-table-content">
                             <table>
@@ -165,7 +170,7 @@
                                         <th>Until Price</th>
                                         <th>Qty</th>
                                         <th>Subtotal</th>
-                                        <th>action</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -173,6 +178,8 @@
                                     <tr>
                                         <?php
                                         $product = DB::table('product')->where('id', $cart->id_product)->first();
+                                        $total += $product->price * $cart->qty;
+                                        $item += $cart->qty;
                                         ?>
                                         <td class="product-thumbnail">
                                             <a href="#"><img style="width: 100px; height: 100px;" src="{{ asset('assets/img/upload/product/' . $cart->image) }}" alt="cart product imager"></a>
@@ -180,8 +187,8 @@
                                         <td class="product-name"><a href="#">{{ $cart->name }}</a></td>
                                         <td class="product-price-cart"><span class="amount">@currency($product->price)</span></td>
                                         <td class="product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" id="qtybutton" value="{{ $cart->qty }}" onclick="klik('{{ $cart->id }}')">
+                                            <div class="cart-plus-minus" id="{{ $cart->id }}">
+                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" id="qtybutton" value="{{ $cart->qty }}">
                                             </div>
                                         </td>
                                         <td class="product-subtotal">@currency($product->price * $cart->qty)</td>
@@ -200,14 +207,14 @@
                                         <a href="{{ route('landing') }}">Continue Shopping</a>
                                     </div>
                                     <div class="cart-clear">
-                                        <button>Update Shopping Cart</button>
+                                        {{-- <button>Update Shopping Cart</button> --}}
                                         <a href="{{ route('removeAllCart') }}">Clear Shopping Cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="cart-tax">
                                 <div class="title-wrap">
@@ -279,9 +286,27 @@
                                     </ul>
                                 </div>
                                 <h4 class="grand-totall-title">Grand Total  <span>$260.00</span></h4>
-                                <a href="#">Proceed to Checkout</a>
+                                <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                             </div>
                         </div>
+                    </div> --}}
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="grand-totall">
+                        {{-- <div class="title-wrap">
+                            <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
+                        </div>
+                        <h5>Total products <span>$260.00</span></h5>
+                        <div class="total-shipping">
+                            <h5>Total shipping</h5>
+                            <ul>
+                                <li><input type="checkbox"> Standard <span>$20.00</span></li>
+                                <li><input type="checkbox"> Express <span>$30.00</span></li>
+                            </ul>
+                        </div> --}}
+                        <h4 class="grand-totall-title">Grand Total  <span>@currency($total)</span></h4>
+                        <p>{{ $item }} item</p>
+                        <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
@@ -293,13 +318,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     $(".cart-plus-minus").click(function(){
-        alert(this.id);
+        // alert($(this).find("input").val() + " - " + this.id);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "{{ route('updateCart') }}",
+            data: {
+                id: this.id,
+                qty: $(this).find("input").val()
+            },
+            success: function() {
+                location.reload();
+            }
+        });
     });
-
-
-    function klik(id) {
-        alert(id);
-    }
 </script>
 <script>
 @include('js')

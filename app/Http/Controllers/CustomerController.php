@@ -126,26 +126,34 @@ class CustomerController extends Controller
         $product_id = $req->input("product_id");
         $qty = $req->input("qtybutton");
 
-        $product = Product::find($product_id);
+        if (Cart::where('id_product', $product_id)->exists()) {
+            $cart = Cart::where('id_product', $product_id)->first();
+            $cart->qty += $qty;
+            $saved = $cart->save();
+        }else {
+            $product = Product::find($product_id);
 
-        $index = Cart::all()->count()+1;
-        $nameid = "CA" . Carbon::now()->toDateTimeString() . str_pad($index,4,"0",STR_PAD_LEFT);
+            $index = Cart::all()->count()+1;
+            $nameid = "CA" . Carbon::now()->toDateTimeString() . str_pad($index,4,"0",STR_PAD_LEFT);
 
-        $cart = new Cart;
-        $cart->id = $nameid;
-        $cart->id_customer = Auth::id();
-        $cart->id_product = $product->id;
-        $cart->name = $product->name;
-        $cart->qty = $qty;
-        $cart->image = $product->image;
-        $saved = $cart->save();
+            $cart = new Cart;
+            $cart->id = $nameid;
+            $cart->id_customer = Auth::id();
+            $cart->id_product = $product->id;
+            $cart->name = $product->name;
+            $cart->qty = $qty;
+            $cart->image = $product->image;
+            $saved = $cart->save();
+        }
 
         return back();
     }
     public function updateCart(Request $req)
     {
-        $carts = Cart::where('id_customer', Auth::id())->get();
-        return view('customer/cart', ['title' => 'cart'], compact('carts'));
+        $cart = Cart::find($req->id);
+        $cart->qty = $req->qty;
+        $saved = $cart->save();
+        return back();
     }
     public function removeCart($id)
     {

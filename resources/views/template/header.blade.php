@@ -171,7 +171,7 @@
                                 </button>
                                 <div class="shopping-cart-content">
                                     <div class="shopping-cart-top">
-                                        <h4>Shoping Cart</h4>
+                                        <h4><a href="{{ route('cart') }}">Shoping Cart</a></h4>
                                         <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
                                     </div>
                                     @if (count($cart) < 1)

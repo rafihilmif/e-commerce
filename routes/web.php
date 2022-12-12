@@ -53,6 +53,7 @@
             Route::post('profile', [CustomerController::class, 'doUpdateProfile'])->name('update');
 
             Route::post('cart', [CustomerController::class, 'addToCart'])->name('addToCart');
+            Route::post('cart/update', [CustomerController::class, 'updateCart'])->name('updateCart');
             Route::get('cart/remove/{id}', [CustomerController::class, 'removeCart'])->name('removeCart');
             Route::get('cart/remove', [CustomerController::class, 'removeAllCart'])->name('removeAllCart');
             Route::get('wishlist/{product}', [CustomerController::class, 'addToWishlist'])->name('addToWishlist');

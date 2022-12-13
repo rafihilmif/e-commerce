@@ -9,7 +9,7 @@
     <title>{{ strtoupper($category->name) }}</title>
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     @include('customerstyle')
-    <script src="{{asset('assets/js/vendor/modernizr-3.11.7.min.js')}}"></script>
+    <script src="{{ asset('assets/js/vendor/modernizr-3.11.7.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
@@ -20,15 +20,14 @@
             <div class="container">
                 <div class="row flex-row-reverse">
                     <div class="col-lg-9">
-                        <div class="shop-top-bar">
-                            <div class="select-shoing-wrap">
-                                <div class="shop-select">
-                                    <select>
-                                        <option value="">ALPHABETICALLY, A TO Z</option>
-                                        <option value="">ALPHABETICALLY, Z TO A</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="pro-sidebar-search mb-50 mt-25">
+                            <form class="pro-sidebar-search-form"
+                                action="{{ route('searchByCategory', $category->name) }}" method="GET">
+                                <input type="text" placeholder="Search here..." name='term'>
+                                <button>
+                                    <i class="sli sli-magnifier"></i>
+                                </button>
+                            </form>
                         </div>
                         <div class="shop-bottom-area mt-35">
                             <div class="tab-content jump">
@@ -116,82 +115,6 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="sidebar-style mr-30">
-                            <div class="sidebar-widget">
-                                <h4 class="pro-sidebar-title">Search </h4>
-                                <div class="pro-sidebar-search mb-50 mt-25">
-                                    <form class="pro-sidebar-search-form"
-                                        action="{{ route('searchByCategory', $category->name) }}" method="GET">
-                                        <input type="text" placeholder="Search here..." name='term'>
-                                        <button>
-                                            <i class="sli sli-magnifier"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="sidebar-widget">
-                                <h4 class="pro-sidebar-title">Refine By </h4>
-                                <div class="sidebar-widget-list mt-30">
-                                    <ul>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">New
-                                                    <span>5</span></a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-widget mt-45">
-                                <h4 class="pro-sidebar-title">Filter By Price </h4>
-                                <div class="price-filter mt-10">
-                                    <div class="price-slider-amount">
-                                        <input type="text" id="amount" name="price" placeholder="Add Your Price"
-                                            readonly />
-                                    </div>
-                                    <div id="slider-range"></div>
-                                </div>
-                            </div>
-
-                            <div class="sidebar-widget mt-40">
-                                <h4 class="pro-sidebar-title">Size </h4>
-                                <div class="sidebar-widget-list mt-20">
-                                    <ul>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">XL
-                                                    <span>4</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">L
-                                                    <span>5</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">SM
-                                                    <span>6</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">XXL
-                                                    <span>7</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -247,12 +170,15 @@
                     sliderrange.slider("values", 1)
                 );
                 let price_1 = sliderrange.slider("values", 0);
-                let price_2 =  sliderrange.slider("values", 1);
+                let price_2 = sliderrange.slider("values", 1);
                 $.ajax({
-                    url:"{{route('filterByCategory')}}",
-                    method:"GET",
-                    data:{price_1:price_1, price_2:price_2},
-                    success:function(res){
+                    url: "{{ route('filterByCategory') }}",
+                    method: "GET",
+                    data: {
+                        price_1: price_1,
+                        price_2: price_2
+                    },
+                    success: function(res) {
                         alert();
                     }
                 });

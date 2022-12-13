@@ -24,15 +24,8 @@
     Route::get('/register', [CustomerController::class, 'doRegister']);
     Route::get('logout', [CustomerController::class, 'logout'])->name('logout');
 
-    Route::get('/aboutus', function () {
-        return view('about');
-    });
-    Route::get('/contactus', function () {
-        return view('contact');
-    });
-    Route::get('/contactus', function () {
-        return view('contact');
-    });
+    Route::get('contact', [SellerController::class, 'contact'])->name('contactus');
+    Route::get('about', [SellerController::class, 'about'])->name('aboutus');
 
     Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
     Route::get('search/collection/{name}', [SellerController::class, 'productSearchByCategory'])->name('searchByCategory');

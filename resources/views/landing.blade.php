@@ -23,8 +23,9 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="slider-content pt-180 slider-animated-1">
                                     <h1 class="animated">MERCHANDISE</h1>
-                                    <p class="animated">Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting industry. It is a long established fact that a reader.</p>
+                                    <p class="animated">Getting merchandise is a solid way to support Band. Every
+                                        purchase you make directly benefits practical and visionary organizing toward
+                                        abolition. Thank you for sharing your resources and keeping root strong!</p>
                                     <div class="slider-btn btn-hover">
                                         <a class="animated" href="shop.html">Shop Now <i
                                                 class="sli sli-basket-loaded"></i></a>
@@ -46,8 +47,10 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                                 <div class="slider-content pt-180 slider-animated-1">
                                     <h1 class="animated">MUSIC</h1>
-                                    <p class="animated">Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting industry. It is a long established fact that a reader.</p>
+                                    <p class="animated">Getting vinyl and anything else is a solid way to support Band.
+                                        Every
+                                        purchase you make directly benefits practical and visionary organizing toward
+                                        abolition. Thank you for sharing your resources and keeping root strong!</p>
                                     <div class="slider-btn btn-hover">
                                         <a class="animated" href="shop.html">Shop Now <i
                                                 class="sli sli-basket-loaded"></i></a>
@@ -95,27 +98,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated"
-                                    src="{{ asset('assets/img/banner/banner-9.png') }}" alt=""></a>
-                            <div class="banner-content banner-position-6">
-                                <h3>Black Friday</h3>
-                                <h2>Wall Lighting <br>Black.</h2>
-                                <a href="product-details.html">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-banner mb-30 text-center scroll-zoom">
-                            <a href="product-details.html"><img class="animated"
-                                    src="{{ asset('assets/img/banner/banner-10.png') }}" alt=""></a>
-                            <div class="banner-content-3 banner-position-7">
-                                <h2>Wall Lighting Black.</h2>
-                                <a href="product-details.html">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -123,8 +105,7 @@
             <div class="container">
                 <div class="section-title text-center pb-60">
                     <h2>Our Merchandise</h2>
-                    <p> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical</p>
+                    <p> Check out and shop official merchandise today! Featuring limited edition.</p>
                 </div>
                 <div class="arrivals-wrap item-wrapper">
                     <div class="ht-products row">
@@ -192,15 +173,23 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7 col-sm-7">
                         <div class="banner-img-2 pr-10 scroll-zoom">
-                            <a href="product-details.html"><img src="{{ asset('assets/img/banner/banner-11.png') }}"
+                            <a href="product-details.html"><img src="{{ asset('assets/img/banner/banner.jpg') }}"
                                     alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 col-sm-5">
                         <div class="banner-bg-content pl-100 scroll-zoom">
-                            <h3>35% off <br>Black Monday</h3>
-                            <h2>NEW MUSIC</h2>
-                            <a href="product-details.html">Shop Now</a>
+                            <h3>RECORD OF THE MONTH</h3>
+                            <p style="text-align: justify;">Legendary Tacoma, Washington mathcore/hardcore/metal band Botch have announced they’ve
+                                signed with Los Angeles label/management company Sargent House.
+
+                                Bassist Brian Cook, guitarist David Knudson, drummer Tim Latona and vocalist Dave
+                                Verellen formed Botch in 1993, becoming one of the most ground-breaking and influential
+                                bands during a pivotal shift in heavy music before splitting in 2002.
+
+                                Their split made way for members to form and or to play in other highly notable and
+                                influential bands including Minus the Bear, These Arms Are Snakes, Narrows, SUMAC and
+                                current Sargent House bands Russian Circles and Torment & Glory.. </p>
                         </div>
                     </div>
                 </div>
@@ -235,7 +224,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-4">
                             <div class="single-feature mb-40">
                                 <div class="feature-icon">
-                                    <img src=" {{asset('assets/img/icon-img/security.png')}}">
+                                    <img src=" {{ asset('assets/img/icon-img/security.png') }}">
                                 </div>
                                 <div class="feature-content">
                                     <h4>Secure Payment</h4>
@@ -243,37 +232,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="instagram-area section-margin-1">
-            <div class="container">
-                <div class="section-title text-center pb-45">
-                    <h2>INSTAGRAM FEED</h2>
-                    <p> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical</p>
-                </div>
-            </div>
-            <div class="instagram-feed-thumb">
-                <div class="instagram-carousel owl-carousel">
-                    <div class="single-instagram-item">
-                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-1.jpg') }}"></a>
-                    </div>
-                    <div class="single-instagram-item">
-                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
-                    </div>
-                    <div class="single-instagram-item">
-                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
-                    </div>
-                    <div class="single-instagram-item">
-                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
-                    </div>
-                    <div class="single-instagram-item">
-                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
-                    </div>
-                    <div class="single-instagram-item">
-                        <a href="#"><img src="{{ asset('assets/img/instagram/instagram-2.jpg') }}"></a>
                     </div>
                 </div>
             </div>

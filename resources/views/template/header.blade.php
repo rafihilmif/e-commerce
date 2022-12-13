@@ -146,8 +146,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">CONTACT</a></li>
-                                    <li><a href="#">ABOUT US</a></li>
+                                    <li><a href="{{ route('contactus') }}">CONTACT</a></li>
+                                    <li><a href="{{ route('aboutus') }}">ABOUT US</a></li>
                                 </ul>
                             </nav>
                         </div>

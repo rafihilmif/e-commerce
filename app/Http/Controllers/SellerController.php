@@ -58,6 +58,14 @@ class SellerController extends Controller
     {
         return view('seller.tag', ['title' => 'Add Tag']);
     }
+    public function contact()
+    {
+        return view('contact', ['title' => 'Contact']);
+    }
+    public function about()
+    {
+        return view('about', ['title' => 'About']);
+    }
     public function updateProduct(Product $product)
     {
         $category = Category::all()->sortBy('name');;

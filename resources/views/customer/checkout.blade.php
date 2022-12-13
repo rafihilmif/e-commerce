@@ -10,25 +10,70 @@
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <script type="text/javascript">
-        var citiesByProvince = {
-            EastJava: ["Bhubaneswar", "Puri", "Cuttack"],
-            CentralJava: ["Mumbai", "Pune", "Nagpur"],
-            WestJava: ["kochi", "Kanpur"]
+        var citiesByState = {
+            EastJava: ["Babat", "Balung", "Bangil", "Bangkalan", "Banyuwangi", "Batu", "Blitar", "Bojonegoro",
+                "Bondowoso", "Jember", "Jombang", "Kediri", "Lamongan", "Lumajang", "Madiun", "Magetan", "Malang",
+                "Mojokerto", "Nganjuk", "Ngawi", "Pacitan", "Pamekasan", "Pasuruan", " Ponorogo", "Probolinggo",
+                "Sidoarjo", "Situbondo", "Sumenep", "Trenggalek", "Tuban", "Tulungagung", "Surabaya"
+            ],
+            CentralJava: ["Adiwerna", "Ambarawa", "Banyumas", "Batang", "Baturaden", "Blora", "Boyolali", "Prambanan",
+                "Ceper", "Cepi", "Colomadu", "Delanggu", "Gatak", "Gebog", "Grogol", "Gombong", "Kartasura",
+                "Magelang", "Magelang", "Salatiga", "Semarang", "Surakarta", "Tegal", "Kudus", "Lebaksiu",
+                "Rembang", "Purwokerto", "Wonosobo"
+            ],
+            WestJava: ["Bandung", "Banjar", "Banjaran", "Bekasi", "Bogor", "Caringin", "Ciamis", "Ciampea",
+                "Cibinong", "Cicurug", "Cikampek", "Cikarang", "Cileungsir", "Cirebon", "Garut", "Indramayu",
+                "Majalengka", "Depok", "Sukabumi", "Tasikmalaya", "Kresek", "Margahayukencana",
+                "Padalarang", "Pamulang", "Rengasdengklok", "Purwakarta", "Serpong", "Soreang", "Sumedang"
+            ],
+            EastKalimantan: ["Balikpapan", "Bontang", "Berau", "Kutai", "Kutai Kartanegara", "Mahakam Hulu", "Paser",
+                "Balikpapan", "Samarinda", "Loa Janan"
+            ],
+            CentralKalimantan: ["Barito", "Gunung Mas", "Kapuas", "Katingan", "Kotawaringin", "Lamandau", "Murung Raya",
+                "Pulang Pisau", "Seruyan", "Sukamara", "Palangka Raya", "Kualapuas", "Palangkaraya", "Pangkalbuun",
+                "Sampit"
+            ],
+            SouthSulawesi: ["Galesong", "Banteng", "Barru", "Bone", "Bulukumba", "Enrekang", "Gowa", "Jeneponto",
+                "Luwu", "Maros", "Pinrang", "Sidenreng Rappang", "Sinjai", "Soppeng", "Takalar", "Tana Toraja",
+                "Wajo", "Makassar", "Maros", "Palopo", "Pare-Pare", "Rantepao", "Selayar", "Watampone"
+            ],
+            SoutheastSulawesi: ["Bombana", "Buton", "Kolaka", "Konawe", "Muna", "Katabu", "Kendari", "Bau-Bau",
+                "Wakatobi"
+            ],
+            CentralSulawesi: ["Banggi", "Buol", "Donggala", "Morowali", "Parigi Muotong", "Poso", "Sigi", "Toli-Toli",
+                "Palu", "Luwuk", "Morowali", "Poso", "Tojo Una-Una"
+            ],
+            NorthSulawesi: ["Bolang Mongondow", "Sangihe", "Minahasa", "Siau Tagulandan Biaro", "Bitung", "Kotamobagu",
+                "Manado", "Tomohon", "Tondano"
+            ],
+            SouthSumatra: ["Baturaja", "Empat Lawang", "Musi", "Ogan Ilir", "Ogan Komering Ulu",
+                "Penukal Abab Lematang Ilir", "Lubuklinggau", "Pagar Alam", "Palembang", "Prambulih", "Lahat",
+                "Tanjugagung"
+            ],
+            WestSumatra: ["Bukit Tinggi", "Agam", "Dharmasraya", "Mentawai", "Lima Puluh", "Pasaman", "Pesisir",
+                'Sijunjung', "Solok", "Tanah Datar", "Padang", "Pariaman"
+            ]
         }
 
         function makeSubmenu(value) {
             if (value.length == 0) document.getElementById("citySelect").innerHTML = "<option></option>";
             else {
                 var citiesOptions = "";
-                for (cityId in citiesByProvince[value]) {
-                    citiesOptions += "<option>" + citiesByProvince[value][cityId] + "</option>";
+                for (cityId in citiesByState[value]) {
+                    citiesOptions += "<option>" + citiesByState[value][cityId] + "</option>";
                 }
                 document.getElementById("citySelect").innerHTML = citiesOptions;
             }
         }
 
+        function displaySelected() {
+            var country = document.getElementById("countrySelect").value;
+            var city = document.getElementById("citySelect").value;
+            alert(country + "\n" + city);
+        }
+
         function resetSelection() {
-            document.getElementById("provinceSelect").selectedIndex = 0;
+            document.getElementById("countrySelect").selectedIndex = 0;
             document.getElementById("citySelect").selectedIndex = 0;
         }
     </script>
@@ -48,32 +93,33 @@
                                     <div class="col-lg-12">
                                         <div class="billing-info mb-20">
                                             <label>Name <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text" value="{{ucfirst(Auth()->user()->name)}}">
+                                            <input type="text" value="{{ ucfirst(Auth()->user()->name) }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="billing-select mb-20">
-                                            <label>Province <abbr class="required" title="required">*</abbr></label>
-                                            <select>
-                                                <option>Select a province</option>
-                                                <option>Azerbaijan</option>
-                                                <option>Bahamas</option>
-                                                <option>Bahrain</option>
-                                                <option>Bangladesh</option>
-                                                <option>Barbados</option>
+                                        <div class="billing-select  mb-20">
+                                            <select id="countrySelect" size="1" onchange="makeSubmenu(this.value)"
+                                                name="province">
+                                                <option disabled selected>Select a Provice</option>
+                                                <option>EastJava</option>
+                                                <option>CentralJava</option>
+                                                <option>WestJava</option>
+                                                <option>EastKalimantan</option>
+                                                <option>CentralKalimantan</option>
+                                                <option>SouthSulawesi</option>
+                                                <option>SoutheastSulawesi</option>
+                                                <option>CentralSulawesi</option>
+                                                <option>NorthSulawesi</option>
+                                                <option>SouthSumatra</option>
+                                                <option>WestSumatra</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="billing-select mb-20">
-                                            <label>City <abbr class="required" title="required">*</abbr></label>
-                                            <select>
-                                                <option>Select a city</option>
-                                                <option>Azerbaijan</option>
-                                                <option>Bahamas</option>
-                                                <option>Bahrain</option>
-                                                <option>Bangladesh</option>
-                                                <option>Barbados</option>
+                                        <div class="billing-select  mb-20">
+                                            <select id="citySelect" size="1" name="city">
+                                                <option disabled selected>Select a City</option>
+                                                <option></option>
                                             </select>
                                         </div>
                                     </div>
@@ -81,7 +127,7 @@
                                         <div class="billing-info mb-20">
                                             <label>Address <abbr class="required" title="required">*</abbr></label>
                                             <input class="billing-address" placeholder="House number and street name"
-                                                type="text" value="{{ucfirst(Auth()->user()->address)}}">
+                                                type="text" value="{{ ucfirst(Auth()->user()->address) }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
@@ -94,7 +140,7 @@
                                     <div class="col-lg-12 col-md-12">
                                         <div class="billing-info mb-20">
                                             <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text"  value="{{Auth()->user()->phone}}">
+                                            <input type="text" value="{{ Auth()->user()->phone }}">
                                         </div>
                                     </div>
                                 </div>
@@ -107,9 +153,9 @@
                         <div class="col-lg-5">
                             <div class="your-order-area">
                                 <?php
-                                    $total = 0;
-                                    $subtotal = 0;
-                                    $item = 0;
+                                $total = 0;
+                                $subtotal = 0;
+                                $item = 0;
                                 ?>
                                 <h3>Your order</h3>
                                 <div class="your-order-wrap gray-bg-4">
@@ -122,12 +168,16 @@
                                         <div class="your-order-middle">
                                             <ul>
                                                 @foreach ($carts as $cart)
-                                                <?php
-                                                    $product = DB::table('product')->where('id', $cart->id_product)->first();
+                                                    <?php
+                                                    $product = DB::table('product')
+                                                        ->where('id', $cart->id_product)
+                                                        ->first();
                                                     $subtotal += $product->price * $cart->qty;
                                                     $item += $cart->qty;
-                                                ?>
-                                                <li>{{ $cart->name }} X {{ $cart->qty }} <span>@currency($product->price * $cart->qty)</span></li>
+                                                    ?>
+                                                    <li>{{ $cart->name }} X {{ $cart->qty }}
+                                                        <span>@currency($product->price * $cart->qty)</span>
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </div>

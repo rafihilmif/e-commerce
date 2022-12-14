@@ -49,7 +49,12 @@
             Route::post('cart/update', [CustomerController::class, 'updateCart'])->name('updateCart');
             Route::get('cart/remove/{id}', [CustomerController::class, 'removeCart'])->name('removeCart');
             Route::get('cart/remove', [CustomerController::class, 'removeAllCart'])->name('removeAllCart');
+
             Route::get('wishlist/{product}', [CustomerController::class, 'addToWishlist'])->name('addToWishlist');
+
+            Route::post('checkout/estimateCost', [CustomerController::class, 'estimateCost'])->name('estimateCost');
+
+            Route::post('order', [CustomerController::class, 'placeOrder'])->name('placeOrder');
         });
     });
     Route::prefix('admin')->group(function () {

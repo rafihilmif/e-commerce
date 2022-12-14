@@ -49,6 +49,8 @@
             CentralSulawesi: ["Banggi", "Buol", "Donggala", "Morowali", "Parigi Muotong", "Poso", "Sigi", "Toli-Toli",
                 "Palu", "Luwuk", "Morowali", "Poso", "Tojo Una-Una"
             ],
+            WestSulawesi: ["Majene", "Mamasa", "Mamuju", "Mamuju Tengah", "Pasangkayu", "Polewali Mandar"
+            ],
             NorthSulawesi: ["Bolang Mongondow", "Sangihe", "Minahasa", "Siau Tagulandan Biaro", "Bitung", "Kotamobagu",
                 "Manado", "Tomohon", "Tondano"
             ],

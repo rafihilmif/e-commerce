@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2022 at 04:30 PM
+-- Generation Time: Dec 15, 2022 at 05:13 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -85,14 +85,6 @@ CREATE TABLE `cart` (
   `qty` int(11) NOT NULL,
   `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `id_customer`, `id_product`, `name`, `qty`, `image`) VALUES
-('CA2022-12-11 16:31:240002', '11', 'ITM-00005', 'AMENRA \"BRANCA\" LONGSLEEVE', 4, '1670082134.jpg'),
-('CA2022-12-12 11:47:360002', '11', 'ITM-00006', 'POWER TRIP \"RUINATION\" T-SHIRT', 3, '1670082847.jpg');
 
 -- --------------------------------------------------------
 
@@ -735,30 +727,6 @@ INSERT INTO `customer` (`id`, `email`, `name`, `password`, `gender`, `address`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_order`
---
-
-DROP TABLE IF EXISTS `detail_order`;
-CREATE TABLE `detail_order` (
-  `id` varchar(255) NOT NULL,
-  `id_customer` int(255) NOT NULL,
-  `courier` varchar(255) NOT NULL,
-  `delivery_type` varchar(255) NOT NULL,
-  `delivery_fee` int(11) NOT NULL,
-  `total` int(11) NOT NULL,
-  `province_order` varchar(255) NOT NULL,
-  `city_order` varchar(255) NOT NULL,
-  `address_order` varchar(255) NOT NULL,
-  `zip_code` varchar(255) NOT NULL,
-  `phone` int(14) NOT NULL,
-  `note` text NOT NULL,
-  `status_order` int(11) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `failed_jobs`
 --
 
@@ -835,24 +803,51 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` varchar(255) NOT NULL,
   `id_customer` varchar(255) NOT NULL,
-  `total` int(10) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `courier` varchar(255) DEFAULT NULL,
+  `delivery_type` varchar(255) DEFAULT NULL,
+  `delivery_fee` int(11) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `province_order` varchar(255) DEFAULT NULL,
+  `city_order` varchar(255) DEFAULT NULL,
+  `address_order` varchar(255) DEFAULT NULL,
+  `zip_code` varchar(255) DEFAULT NULL,
+  `phone` varchar(16) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `status_order` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `id_customer`, `name`, `courier`, `delivery_type`, `delivery_fee`, `total`, `province_order`, `city_order`, `address_order`, `zip_code`, `phone`, `note`, `status_order`, `created_at`, `updated_at`) VALUES
+('ODR2022-12-15 16:11:200001', '11', 'Darmaji Susanto', 'jne', 'Ongkos Kirim Ekonomis', 37000, 4387000, 'EastKalimantan', 'Balikpapan', 'Jalan Raya PKP No. 24 Kelapa', '3737', '081293753692', NULL, 'Waiting Confirmation', '2022-12-15 16:11:20', '2022-12-15 16:11:20');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_produk`
+-- Table structure for table `order_product`
 --
 
-DROP TABLE IF EXISTS `order_produk`;
-CREATE TABLE `order_produk` (
+DROP TABLE IF EXISTS `order_product`;
+CREATE TABLE `order_product` (
+  `id` int(20) NOT NULL,
   `id_order` varchar(255) NOT NULL,
-  `id_produk` int(4) NOT NULL,
+  `id_produk` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
-  `qty` int(4) NOT NULL
+  `qty` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_product`
+--
+
+INSERT INTO `order_product` (`id`, `id_order`, `id_produk`, `price`, `qty`) VALUES
+(5, 'ODR2022-12-15 16:11:200001', 'ITM-00005', 750000, 4),
+(6, 'ODR2022-12-15 16:11:200001', 'ITM-00006', 450000, 3);
 
 -- --------------------------------------------------------
 
@@ -1108,12 +1103,6 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `detail_order`
---
-ALTER TABLE `detail_order`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -1130,6 +1119,18 @@ ALTER TABLE `image`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_product`
+--
+ALTER TABLE `order_product`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1198,6 +1199,12 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `order_product`
+--
+ALTER TABLE `order_product`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

@@ -6,6 +6,8 @@ use App\Models\Cart;
 use App\Models\City;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
+use App\Models\Order_product;
+use App\Models\Orders;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -237,7 +239,63 @@ class CustomerController extends Controller
 
     public function placeOrder(Request $req)
     {
-        dd($req);
-        redirect('/');
+        $name = $req->name;
+        $courier = $req->courier;
+        $delivery_type = $req->delivery_type;
+        $delivery_fee = $req->delivery_fee;
+        $total = $req->total;
+        $province_order = $req->province_order;
+        $city_order = $req->city_order;
+        $address_order = $req->address_order;
+        $zip_code = $req->zip_code;
+        $phone = $req->phone;
+        $note = $req->note;
+
+        $id = "";
+
+        try {
+            do {
+                $index = Orders::all()->count()+1;
+                $id = "ODR" . Carbon::now()->toDateTimeString() . str_pad($index,4,"0",STR_PAD_LEFT);
+            } while (Orders::where('id', $id)->exists());
+
+            $order = new Orders;
+            $order->id = $id;
+            $order->id_customer = Auth::id();
+            $order->name = $name;
+            $order->courier = $courier;
+            $order->delivery_type = $delivery_type;
+            $order->delivery_fee = $delivery_fee;
+            $order->total = $total;
+            $order->province_order = $province_order;
+            $order->city_order = $city_order;
+            $order->address_order = $address_order;
+            $order->zip_code = $zip_code;
+            $order->phone = $phone;
+            $order->note = $note;
+            $order->status_order = "Waiting Confirmation";
+            $order->created_at = Carbon::now()->toDateTimeString();
+            $order->save();
+
+
+            $carts = Cart::where('id_customer', Auth::id())->get();
+            foreach ($carts as $cart) {
+                $product = Product::where('id', $cart->id_product)->first();
+
+                $orderP = new Order_product;
+                $orderP->id_order = $id;
+                $orderP->id_produk = $cart->id_product;
+                $orderP->price = $product->price;
+                $orderP->qty = $cart->qty;
+                $orderP->save();
+            }
+
+            Cart::where('id_customer', Auth::id())->delete();
+
+            return response()->json($note);
+
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
     }
 }

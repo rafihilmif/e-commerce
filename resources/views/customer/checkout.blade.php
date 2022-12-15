@@ -66,6 +66,7 @@
                 document.getElementById("citySelect").innerHTML = citiesOptions;
             }
             estimatecost();
+            cek();
         }
 
         function displaySelected() {
@@ -95,7 +96,7 @@
                                     <div class="col-lg-12">
                                         <div class="billing-info mb-20">
                                             <label>Name <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text" value="{{ ucfirst(Auth()->user()->name) }}">
+                                            <input type="text" id="inputName" value="{{ ucfirst(Auth()->user()->name) }}" onchange="cek()">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -135,26 +136,26 @@
                                         <div class="billing-info mb-20">
                                             <label>Address <abbr class="required" title="required">*</abbr></label>
                                             <input class="billing-address" placeholder="House number and street name"
-                                                type="text" value="{{ ucfirst(Auth()->user()->address) }}">
+                                                type="text" id="inputAddress" value="{{ ucfirst(Auth()->user()->address) }}" onchange="cek()">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="billing-info mb-20">
                                             <label>Postcode / ZIP <abbr class="required"
                                                     title="required">*</abbr></label>
-                                            <input type="text">
+                                            <input type="text" id="inputZip" onchange="cek()">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="billing-info mb-20">
                                             <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                            <input type="text" value="{{ Auth()->user()->phone }}">
+                                            <input type="text" id="inputPhone" value="{{ Auth()->user()->phone }}" onchange="cek()">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="additional-info-wrap">
                                     <label>Order notes</label>
-                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery. " name="message"></textarea>
+                                    <textarea id="inputNote" placeholder="Notes about your order, e.g. special notes for delivery. " name="message" value=""></textarea>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +264,7 @@
                                     </div>
                                 </div>
                                 <div class="Place-order mt-40">
-                                    <a href="#">Place Order</a>
+                                    <a href="#" onclick="placeOrder()" class="btn disabled" id="orderButton">Place Order</a>
                                 </div>
                             </div>
                         </div>
@@ -282,48 +283,100 @@
 </body>
 
 <script>
+    var cost = 0;
+    var subtotal = 0;
+
+    function cek() {
+        if (
+            $("#courier").val() != null &&
+            $("#delivery").val() != null &&
+            $("#inputName").val() != "" &&
+            $("#countrySelect").val() != null &&
+            $("#citySelect").val() != null &&
+            $("#inputAddress").val() != "" &&
+            $("#inputZip").val() != "" &&
+            $("#inputPhone").val() != ""
+        ) {
+            $("#orderButton").removeClass("btn disabled");
+        }else{
+            $("#orderButton").addClass("btn disabled");
+        }
+        console.log($("#inputNote").val());
+    }
+
     function estimatecost() {
-            if ($("#countrySelect").val() != null && $("#citySelect").val() != null && $("#courier").val() != null) {
-                // alert($("#countrySelect").val() + " - " + $("#citySelect").val() + " - " + $("#courier").val());
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('estimateCost') }}",
-                    data: {
-                        province: $("#countrySelect").val(),
-                        city: $("#citySelect").val(),
-                        courier: $("#courier").val()
-                    },
-                    success: function(cost) {
-                        // location.reload();
-                        // $("#estimatedCost").html(cost['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value']);
+        if ($("#countrySelect").val() != null && $("#citySelect").val() != null && $("#courier").val() != null) {
+            // alert($("#countrySelect").val() + " - " + $("#citySelect").val() + " - " + $("#courier").val());
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('estimateCost') }}",
+                data: {
+                    province: $("#countrySelect").val(),
+                    city: $("#citySelect").val(),
+                    courier: $("#courier").val()
+                },
+                success: function(cost) {
+                    // location.reload();
+                    // $("#estimatedCost").html(cost['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value']);
 
-                        var deliveryOptions = "<option disabled selected>Select a Delivery type</option>";
-                        cost['rajaongkir']['results'][0]['costs'].forEach(type => {
-                            deliveryOptions += "<option value=" + type['cost'][0]['value'] + ">" + type['description'] + "</option>";
-                        });
-                        document.getElementById("delivery").innerHTML = deliveryOptions;
-                    }
-                });
+                    var deliveryOptions = "<option disabled selected>Select a Delivery type</option>";
+                    cost['rajaongkir']['results'][0]['costs'].forEach(type => {
+                        deliveryOptions += "<option value=" + type['cost'][0]['value'] + ">" + type['description'] + "</option>";
+                    });
+                    document.getElementById("delivery").innerHTML = deliveryOptions;
+                    cek();
+                }
+            });
+        }
+    }
+
+    function estimatecost2() {
+        // var cost = number_format($("#delivery").val(),0,',','.');
+        // $("#estimatedCost").html("@currency(0)");
+        // var currency = number_format($("#delivery").val(),0,',','.');
+        // alert(currency);
+
+        cost = parseInt($("#delivery").val());
+        subtotal = parseInt('<?php echo $subtotal; ?>');
+
+        $("#estimatedCost").html("Rp. " + cost.toLocaleString());
+        $("#total").html("Rp. " + (subtotal + cost).toLocaleString());
+        cek();
+    }
+
+    function placeOrder() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        }
-
-        function estimatecost2() {
-            // var cost = number_format($("#delivery").val(),0,',','.');
-            // $("#estimatedCost").html("@currency(0)");
-            // var currency = number_format($("#delivery").val(),0,',','.');
-            // alert(currency);
-
-            var cost = parseInt($("#delivery").val());
-            var subtotal = parseInt('<?php echo $subtotal; ?>');
-
-            $("#estimatedCost").html("Rp. " + cost.toLocaleString());
-            $("#total").html("Rp. " + (subtotal + cost).toLocaleString());
-        }
+        });
+        $.ajax({
+            type: "POST",
+            url: "{{ route('placeOrder') }}",
+            data: {
+                courier: $("#courier").val(),
+                delivery_type: $("#delivery option:selected").text(),
+                delivery_fee: cost,
+                total: (subtotal + cost),
+                name: $("#inputName").val(),
+                province_order: $("#countrySelect").val(),
+                city_order: $("#citySelect").val(),
+                address_order: $("#inputAddress").val(),
+                zip_code: $("#inputZip").val(),
+                phone: $("#inputPhone").val(),
+                note: $("#inputNote").val()
+            },
+            success: function(data) {
+                // alert(data);
+                window.location = "{{ route('landing') }}";
+            }
+        });
+    }
 </script>
 
 </html>

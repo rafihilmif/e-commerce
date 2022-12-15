@@ -13,12 +13,13 @@ use App\Models\Images;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Termwind\Components\Dd;
+use Termwind\Components\Raw;
 
 class SellerController extends Controller
 {
     public function landing(Request $req)
     {
-        $product = DB::table('product')->paginate(8);
+        $product = DB::table('product')->orderBy('created_at', 'DESC')->paginate(12);
         return view('landing', ['title' => 'Noiseblod'], compact('product'));
     }
     public function dashboard()
@@ -43,7 +44,7 @@ class SellerController extends Controller
     }
     public function image()
     {
-        $product = Product::all();
+        $product = Product::all()->sortBy('name');
         return view('seller.image', ['title' => 'Add Image'], compact('product'));
     }
     public function category()
@@ -167,13 +168,13 @@ class SellerController extends Controller
     public function productCategory($name)
     {
         $category = Category::where('name', $name)->first();
-        $product = Product::where('id_category', $category->id)->paginate(12);
+        $product = Product::where('id_category', $category->id)->orderBy('name', 'ASC')->paginate(12);
         return view('collection', compact('category', 'product'));
     }
     public function productArtist($name)
     {
         $artist = Artist::where('name', $name)->first();
-        $product = Product::where('id_artist', $artist->id)->paginate(12);
+        $product = Product::where('id_artist', $artist->id)->orderBy('name', 'ASC')->paginate(12);
         return view('artist', compact('artist', 'product'));
     }
     public function productSearchByCategory(Request $req, $name)
@@ -234,8 +235,22 @@ class SellerController extends Controller
             return redirect()->back()->with("pesanGagal", "Gagal menghapus data!");
         }
     }
-    public function filterByCategory(Request $req, $name)
+    public function apparel()
     {
-        return "OK";
+        $category = Category::where('parent', '=', 'Apparel')->first();
+        $product = Product::where('id_category', $category->id)->paginate(12);
+        return view('apparel', compact('category', 'product'));
+    }
+    public function music()
+    {
+        $category = Category::where('parent', '=', 'Music')->first();
+        $product = Product::where('id_category', $category->id)->paginate(12);
+        return view('apparel', compact('category', 'product'));
+    }
+    public function accessories()
+    {
+        $category = Category::where('parent', '=', 'Accessories')->first()->sortBy('name');
+        $product = Product::where('id_category', $category->id)->paginate(12);
+        return view('apparel', compact('category', 'product'));
     }
 }

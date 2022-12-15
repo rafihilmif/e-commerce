@@ -17,7 +17,7 @@
 */
 
     Route::get('/', [SellerController::class, 'landing'])->name('landing');
-
+    
     Route::get('/login', [CustomerController::class, 'login'])->name('login');
     Route::post('login', [CustomerController::class, 'doLogin'])->name('doLogin');
 
@@ -30,12 +30,16 @@
     Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
     Route::get('search/collection/{name}', [SellerController::class, 'productSearchByCategory'])->name('searchByCategory');
     Route::get('search/artist/{name}', [SellerController::class, 'productSearchByArtist'])->name('searchByArtist');
-
+    
     Route::get('filter', [SellerController::class, 'filterByCategory'])->name('filterByCategory');
 
     Route::get('collection/{name}', [SellerController::class, 'productCategory'])->name('collection');
     Route::get('artist/{name}', [SellerController::class, 'productArtist'])->name('artists');
 
+    Route::get('apparel', [SellerController::class, 'apparel'])->name('apparel');
+    Route::get('music', [SellerController::class, 'music'])->name('music');
+    Route::get('accessories', [SellerController::class, 'accessories'])->name('accessories');
+    
     Route::group(['prefix' => 'customer',  'middleware' => 'auth'], function () {
         Route::prefix('/')->group(function () {
             Route::get('home', [CustomerController::class, 'home'])->name('home');
@@ -52,6 +56,7 @@
             Route::get('wishlist/{product}', [CustomerController::class, 'addToWishlist'])->name('addToWishlist');
         });
     });
+    
     Route::prefix('admin')->group(function () {
         Route::prefix('/')->group(function () {
             Route::get('home', [AdminController::class, 'home']);
@@ -62,6 +67,7 @@
             Route::get('home/{id}', [AdminController::class, 'doHapus'])->name('doHapus');
         });
     });
+    
     Route::prefix('seller')->group(function () {
         Route::prefix('/')->group(function () {
 

@@ -70,7 +70,7 @@ class CustomerController extends Controller
     }
     public function home(Request $req)
     {
-        $product = DB::table('product')->paginate(8);
+        $product = DB::table('product')->orderBy('created_at', 'DESC')->paginate(12);
 
         if (Auth::check()) {
             return view('landing', ['title' => 'Noiseblod'], compact('product'));

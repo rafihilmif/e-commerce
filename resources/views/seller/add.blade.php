@@ -64,6 +64,7 @@
                                                     <div class="form-group">
                                                         <label for="city-column">Tag</label>
                                                         <select name="tag" class="form-control">
+                                                            <option value="-">-</option>
                                                             @foreach ($tag as $item)
                                                                 <option>{{ strtoupper($item->name) }}</option>
                                                             @endforeach
@@ -74,6 +75,7 @@
                                                     <div class="form-group">
                                                         <label>Material</label>
                                                         <select name="material" class="form-control">
+                                                            <option value="-">-</option>
                                                             <option value="Cotton">COTTON</option>
                                                             <option value="Polyster">POLYSTER</option>
                                                             <option value="Fleece">FLEECE</option>

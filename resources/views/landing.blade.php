@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -73,7 +72,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated"
+                            <a href="{{route('apparel')}}"><img class="animated"
                                     src="{{ asset('assets/img/banner/longsleeve.jpg') }}" alt=""></a>
                             <div class="banner-content-2 banner-position-5">
                                 <h4 style="color: white;">APPAREL</h4>
@@ -82,7 +81,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated"
+                            <a href="{{route('music')}}"><img class="animated"
                                     src="{{ asset('assets/img/banner/vinyl.jpg') }}" alt=""></a>
                             <div class="banner-content-2 banner-position-5">
                                 <h4 style="color: white;">MUSIC</h4>
@@ -91,7 +90,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30 scroll-zoom">
-                            <a href="product-details.html"><img class="animated"
+                            <a href="{{route('accessories')}}"><img class="animated"
                                     src="{{ asset('assets/img/banner/pin.jpg') }}" alt=""></a>
                             <div class="banner-content-2 banner-position-5">
                                 <h4 style="color: white;">ACCESSORIES</h4>

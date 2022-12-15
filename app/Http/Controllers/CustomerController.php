@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\City;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use App\Models\Product;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Kodepandai\LaravelRajaOngkir\Facades\RajaOngkir;
 use Ramsey\Uuid\Uuid;
 
 class CustomerController extends Controller
@@ -168,7 +170,39 @@ class CustomerController extends Controller
 
     public function checkout(Request $req)
     {
+        // $origin = "Surabaya";
+        // $destination = "Balikpapan";
+        // $weight = 0;
+        // $courier = "jne";
+
+        // $data = json_decode(RajaOngkir::getCity(), true);
+
+        // $cities = $data['rajaongkir']['results'];
+        // foreach ($cities as $c) {
+        //     if ($c['city_name'] == $origin) {
+        //         $origin = $c['city_id'];
+        //     }
+        //     if ($c['city_name'] == $destination) {
+        //         $destination = $c['city_id'];
+        //     }
+        // }
+
+        // $carts = Cart::where('id_customer', Auth::id())->get();
+        // foreach ($carts as $cart) {
+        //     $weight += $cart->qty;
+        // }
+        // $weight = $weight*500;
+
+        // $data = RajaOngkir::getCost($origin,'city', $destination,'city', $weight, $courier);
+        // $cost = json_decode($data, true);
+        // dd($cost['rajaongkir']['results'][0]['costs']);
+
+        // $data = json_decode(RajaOngkir::getCity(), true);
+        // $cities = $data['rajaongkir']['results'];
+        // dd($cities);
+
         $carts = Cart::where('id_customer', Auth::id())->get();
+
         return view('customer/checkout', ['title' => 'checkout'], compact('carts'));
     }
 
@@ -181,5 +215,29 @@ class CustomerController extends Controller
     public function addToWishlist(Product $product)
     {
         return back();
+    }
+
+    public function estimateCost(Request $req)
+    {
+        $origin = City::where('title', 'Surabaya')->first();
+        $destination = City::where('title', $req->city)->first();
+        $weight = 0;
+        $courier = $req->courier;
+
+        $carts = Cart::where('id_customer', Auth::id())->get();
+        foreach ($carts as $cart) {
+            $weight += $cart->qty;
+        }
+        $weight = $weight*0.5;
+
+        $data = RajaOngkir::getCost($origin->city_id,'city', $destination->city_id,'city', $weight, $courier);
+        $cost = json_decode($data, true);
+        return response()->json($cost);
+    }
+
+    public function placeOrder(Request $req)
+    {
+        dd($req);
+        redirect('/');
     }
 }

@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <script type="text/javascript">
@@ -64,6 +65,7 @@
                 }
                 document.getElementById("citySelect").innerHTML = citiesOptions;
             }
+            estimatecost();
         }
 
         function displaySelected() {
@@ -97,30 +99,36 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="billing-select  mb-20">
-                                            <select id="countrySelect" size="1" onchange="makeSubmenu(this.value)"
-                                                name="province">
-                                                <option disabled selected>Select a Provice</option>
-                                                <option>EastJava</option>
-                                                <option>CentralJava</option>
-                                                <option>WestJava</option>
-                                                <option>EastKalimantan</option>
-                                                <option>CentralKalimantan</option>
-                                                <option>SouthSulawesi</option>
-                                                <option>SoutheastSulawesi</option>
-                                                <option>CentralSulawesi</option>
-                                                <option>NorthSulawesi</option>
-                                                <option>SouthSumatra</option>
-                                                <option>WestSumatra</option>
-                                            </select>
+                                        <div class="billing-info mb-20">
+                                            <label>Province <abbr class="required" title="required">*</abbr></label>
+                                            <div class="billing-select  mb-20">
+                                                <select id="countrySelect" size="1" onchange="makeSubmenu(this.value)"
+                                                    name="province">
+                                                    <option disabled selected value="">Select a Provice</option>
+                                                    <option>EastJava</option>
+                                                    <option>CentralJava</option>
+                                                    <option>WestJava</option>
+                                                    <option>EastKalimantan</option>
+                                                    <option>CentralKalimantan</option>
+                                                    <option>SouthSulawesi</option>
+                                                    <option>SoutheastSulawesi</option>
+                                                    <option>CentralSulawesi</option>
+                                                    <option>NorthSulawesi</option>
+                                                    <option>SouthSumatra</option>
+                                                    <option>WestSumatra</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="billing-select  mb-20">
-                                            <select id="citySelect" size="1" name="city">
-                                                <option disabled selected>Select a City</option>
-                                                <option></option>
-                                            </select>
+                                        <div class="billing-info mb-20">
+                                            <label>City <abbr class="required" title="required">*</abbr></label>
+                                            <div class="billing-select  mb-20">
+                                                <select id="citySelect" size="1" name="city" onchange="estimatecost()">
+                                                    <option disabled selected value="">Select a City</option>
+                                                    <option></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -183,18 +191,41 @@
                                         </div>
                                         <div class="your-order-info order-subtotal">
                                             <ul>
-                                                <li>Subtotal <span>@currency($subtotal)</span></li>
+                                                <li>Subtotal <span id="subtotal">@currency($subtotal)</span></li>
                                             </ul>
                                         </div>
                                         <div class="your-order-info order-shipping">
                                             <ul>
-                                                <li>Shipping <p>Enter your full address to see shipping <br>costs. </p>
+                                                <li>Shipping <p>Enter your full address to see shipping costs. </p>
+                                                </li>
+                                                <li><br>
+                                                    Courier
+                                                    <span>
+                                                        <select name="courier" id="courier" onchange="estimatecost()">
+                                                            <option disabled selected>Select a Courier</option>
+                                                            <option value="jne">JNE</option>
+                                                            <option value="pos">POS Indonesia</option>
+                                                            <option value="tiki">TIKI</option>
+                                                        </select>
+                                                    </span>
+                                                </li>
+                                                <li><br>
+                                                    Delivery
+                                                    <span>
+                                                        <select name="delivery" id="delivery"" onchange="estimatecost2()">
+                                                            <option disabled selected>Select a Delivery type</option>
+                                                        </select>
+                                                    </span>
+                                                </li>
+                                                <li><br>
+                                                    Shipping Cost
+                                                    <span id="estimatedCost">@currency(0)</span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="your-order-info order-total">
                                             <ul>
-                                                <li>Total <span>$273.00 </span></li>
+                                                <li>Total <span id="total">@currency($subtotal) </span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -249,5 +280,50 @@
 
 
 </body>
+
+<script>
+    function estimatecost() {
+            if ($("#countrySelect").val() != null && $("#citySelect").val() != null && $("#courier").val() != null) {
+                // alert($("#countrySelect").val() + " - " + $("#citySelect").val() + " - " + $("#courier").val());
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('estimateCost') }}",
+                    data: {
+                        province: $("#countrySelect").val(),
+                        city: $("#citySelect").val(),
+                        courier: $("#courier").val()
+                    },
+                    success: function(cost) {
+                        // location.reload();
+                        // $("#estimatedCost").html(cost['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value']);
+
+                        var deliveryOptions = "<option disabled selected>Select a Delivery type</option>";
+                        cost['rajaongkir']['results'][0]['costs'].forEach(type => {
+                            deliveryOptions += "<option value=" + type['cost'][0]['value'] + ">" + type['description'] + "</option>";
+                        });
+                        document.getElementById("delivery").innerHTML = deliveryOptions;
+                    }
+                });
+            }
+        }
+
+        function estimatecost2() {
+            // var cost = number_format($("#delivery").val(),0,',','.');
+            // $("#estimatedCost").html("@currency(0)");
+            // var currency = number_format($("#delivery").val(),0,',','.');
+            // alert(currency);
+
+            var cost = parseInt($("#delivery").val());
+            var subtotal = parseInt('<?php echo $subtotal; ?>');
+
+            $("#estimatedCost").html("Rp. " + cost.toLocaleString());
+            $("#total").html("Rp. " + (subtotal + cost).toLocaleString());
+        }
+</script>
 
 </html>

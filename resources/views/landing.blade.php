@@ -13,6 +13,7 @@
 <body>
     <div class="wrapper">
         @include('template.header')
+        @include('flash-message')
         <div class="slider-area section-padding-1">
             <div class="slider-active-2 owl-carousel nav-style-2 dot-style-1">
                 <div class="single-slider slider-height-2 bg-aliceblue">

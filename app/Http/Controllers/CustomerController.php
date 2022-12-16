@@ -64,7 +64,7 @@ class CustomerController extends Controller
         if (Auth::attempt(['email' => $req->email, 'password' => $req->password], $remember_me)) {
             $customer = auth()->user();
             $req->session()->regenerate();
-            return redirect()->intended('customer/home');
+            return redirect()->intended('customer/home')->with('success', 'Login Successful!');
         }
         return back()->withErrors([
             'password' => 'Password incorrect',

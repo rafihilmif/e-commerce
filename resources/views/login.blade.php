@@ -82,6 +82,7 @@
 <body>
     <div class="wrapper">
         @include('template.header')
+        @include('flash-message')
         <div class="login-register-area pt-100 pb-100">
             <div class="container">
                 <div class="row">

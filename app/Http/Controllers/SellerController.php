@@ -10,6 +10,8 @@ use App\Models\Artist;
 use App\Models\Customer;
 use App\Models\Tag;
 use App\Models\Images;
+use App\Models\Order_product;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Termwind\Components\Dd;
@@ -252,5 +254,18 @@ class SellerController extends Controller
         $category = Category::where('parent', '=', 'Accessories')->first()->sortBy('name');
         $product = Product::where('id_category', $category->id)->paginate(12);
         return view('apparel', compact('category', 'product'));
+    }
+
+    public function delivery()
+    {
+        $orders = DB::table('orders')->paginate(5);
+        return view('seller.delivery', ['title' => 'delivery'], compact('orders'));
+    }
+
+    public function deliveryDetail($id)
+    {
+        $order = Orders::where('id', $id)->first();
+        $detail = Order_product::where('id_order', $id)->first();
+        return view('seller.deliveryDetail', ['title' => 'delivery'], compact('order', 'detail'));
     }
 }

@@ -17,7 +17,7 @@
 */
 
     Route::get('/', [SellerController::class, 'landing'])->name('landing');
-    
+
     Route::get('/login', [CustomerController::class, 'login'])->name('login');
     Route::post('login', [CustomerController::class, 'doLogin'])->name('doLogin');
 
@@ -30,7 +30,7 @@
     Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
     Route::get('search/collection/{name}', [SellerController::class, 'productSearchByCategory'])->name('searchByCategory');
     Route::get('search/artist/{name}', [SellerController::class, 'productSearchByArtist'])->name('searchByArtist');
-    
+
     Route::get('filter', [SellerController::class, 'filterByCategory'])->name('filterByCategory');
 
     Route::get('collection/{name}', [SellerController::class, 'productCategory'])->name('collection');
@@ -39,7 +39,7 @@
     Route::get('apparel', [SellerController::class, 'apparel'])->name('apparel');
     Route::get('music', [SellerController::class, 'music'])->name('music');
     Route::get('accessories', [SellerController::class, 'accessories'])->name('accessories');
-    
+
     Route::group(['prefix' => 'customer',  'middleware' => 'auth'], function () {
         Route::prefix('/')->group(function () {
             Route::get('home', [CustomerController::class, 'home'])->name('home');
@@ -61,7 +61,7 @@
             Route::post('order', [CustomerController::class, 'placeOrder'])->name('placeOrder');
         });
     });
-    
+
     Route::prefix('admin')->group(function () {
         Route::prefix('/')->group(function () {
             Route::get('home', [AdminController::class, 'home']);
@@ -72,7 +72,7 @@
             Route::get('home/{id}', [AdminController::class, 'doHapus'])->name('doHapus');
         });
     });
-    
+
     Route::prefix('seller')->group(function () {
         Route::prefix('/')->group(function () {
 
@@ -99,5 +99,8 @@
             Route::get('update/product/{product}', [SellerController::class, 'updateProduct'])->name('updateProduct');
             Route::post("update/product", [SellerController::class, "doUpdateProduct"])->name('doUpdateProduct');
             Route::get("delete/{id}", [SellerController::class, "deleteProduct"])->name('deleteProduct');
+
+            Route::get('delivery', [SellerController::class, 'delivery'])->name('delivery');
+            Route::get('delivery/detail/{id}', [SellerController::class, 'deliveryDetail'])->name('deliveryDetail');
         });
     });

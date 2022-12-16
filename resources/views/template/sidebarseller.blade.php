@@ -82,7 +82,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{route('delivery')}}" class='sidebar-link'>
                         <i class="bi bi-truck"></i>
                         <span>Shipping</span>
                     </a>

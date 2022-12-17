@@ -54,10 +54,10 @@ class AdminController extends Controller
         }
     }
 
-    public function ubah(Customer $cust, Request $req){
-        $customer = Customer::all()->find($req->id);
+    public function ubahuser(Request $req){
+        $customer = Customer::all()->where('id',$req->id);
         $param["daftarcustomer"] = $customer;
-        $param["customer"] = $cust;
+        //$param["cust"] = $cust;
         return view('admin.update', $param);
     }
 
@@ -74,17 +74,27 @@ class AdminController extends Controller
                 'phone' => 'required'
             ]
         );
-        $ubahcust = Customer::find($req->id);
-        $ubahcust->email = $req->email;
-        $ubahcust->name = $req->name;
-        $ubahcust->password = $req->password;
-        $ubahcust->gender = $req->gender;
-        $ubahcust->province = $req->provinsi;
-        $ubahcust->city = $req->city;
-        $ubahcust->birthdate = $req->birthdate;
-        $ubahcust->phone = $req->phone;
-        $ubahcust->id = Uuid::uuid4()->getHex();
-        $res = $ubahcust->save();
+        $ubahcust = Customer::where('id',$req->id);
+        $res = $ubahcust->update([
+            'email' => $req->email,
+            'name' => $req->name,
+            'password' => $req->password,
+            'gender' => $req->gender,
+            'province' => $req->provinsi,
+            'city' => $req->city,
+            'birthdate' => $req->birthdate,
+            'phone' => $req->phone
+        ]);
+        // $ubahcust->email = $req->email;
+        // $ubahcust->name = $req->name;
+        // $ubahcust->password = $req->password;
+        // $ubahcust->gender = $req->gender;
+        // $ubahcust->province = $req->provinsi;
+        // $ubahcust->city = $req->city;
+        // $ubahcust->birthdate = $req->birthdate;
+        // $ubahcust->phone = $req->phone;
+        // $ubahcust->id = Uuid::uuid4()->getHex();
+        // $res = $ubahcust->save();
         if($res){
             return redirect()->back()->with('pesanSukses', 'Berhasil Mengubah Customer');
         }

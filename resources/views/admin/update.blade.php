@@ -105,7 +105,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('doUbah') }}" method="POST">
+                                        <form class="form" action="{{ route('ubahUser') }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <input type="hidden" name="id" value="{{ old('id') }}">
@@ -113,7 +113,7 @@
                                                     <div class="form-group">
                                                         <label for="first-name-column">Email</label>
                                                         <input type="text" id="first-name-column"
-                                                            class="form-control" placeholder="Email" name="email" value="{{ $customer->email }}">
+                                                            class="form-control" placeholder="Email" name="email" value="{{ old('email') }}">
                                                         @error('email')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -123,7 +123,7 @@
                                                     <div class="form-group">
                                                         <label for="last-name-column">Name</label>
                                                         <input type="text" id="first-name-column"
-                                                            class="form-control" placeholder="Name" name="name" value="{{ $customer->name }}">
+                                                            class="form-control" placeholder="Name" name="name" value="{{ old('name') }}">
                                                         @error('name')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -133,7 +133,7 @@
                                                     <div class="form-group">
                                                         <label for="city-column">Password</label>
                                                         <input type="password" id="first-name-column"
-                                                        class="form-control" placeholder="Password" name="password" value="{{ $customer->password }}">
+                                                        class="form-control" placeholder="Password" name="password" value="{{ old('password') }}">
                                                         @error('password')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -141,7 +141,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <select name="gender" class="form-control" value="{{ $customer->gender }}">
+                                                        <select name="gender" class="form-control" value="{{ old('gender') }}">
                                                             <option disabled selected>Select a Gender</option>
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
@@ -152,7 +152,7 @@
                                                     <div class="form-group">
                                                         <label>Address</label>
                                                         <input type="text" id="first-name-column"
-                                                        class="form-control" placeholder="Address" name="address" value="{{ $customer->address }}">
+                                                        class="form-control" placeholder="Address" name="address" value="{{ old('address') }}">
                                                         @error('address')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -163,7 +163,7 @@
                                                         <label>Provinsi</label>
                                                         <select id="countrySelect" size="1"
                                                         onchange="makeSubmenu(this.value)" name="provinsi"
-                                                        class="form-control" value="{{ $customer->provinsi }}">
+                                                        class="form-control" value="{{ old('provinsi') }}">
                                                         <option disabled selected>Select a Provice</option>
                                                         <option>EastJava</option>
                                                         <option>CentralJava</option>
@@ -186,7 +186,7 @@
                                                     <div class="form-group">
                                                         <label>City</label>
                                                         <select id="citySelect" size="1" name="city"
-                                                            class="form-control" value="{{ $customer->city }}">
+                                                            class="form-control" value="{{ old('city') }}">
                                                             <option disabled selected>Select a City</option>
                                                             <option></option>
                                                         </select>
@@ -198,7 +198,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label>BirthDate</label>
-                                                        <input type="date" name="birthdate" id="" class="form-control" value="{{ $customer->birthdate }}">
+                                                        <input type="date" name="birthdate" id="" class="form-control" value="{{ old('birthdate') }}">
                                                         @error('birthdate')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -207,7 +207,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label>Phone</label>
-                                                        <input type="text" name="phone" id="" class="form-control" value="{{ $customer->phone }}">
+                                                        <input type="text" name="phone" id="" class="form-control" value="{{ old('phone') }}">
                                                         @error('phone')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror
@@ -216,7 +216,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <button type="submit"
-                                                            class="btn btn-primary form-control">Add</button>
+                                                            class="btn btn-primary form-control">Update</button>
                                                     </div>
                                                 </div>
                                             </div>

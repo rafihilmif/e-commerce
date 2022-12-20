@@ -67,7 +67,7 @@
             Route::get('home', [AdminController::class, 'home']);
             Route::get('add/user', [AdminController::class, 'add'])->name('addUser');
             Route::post('add/user', [AdminController::class, 'adduser'])->name('doAddUser');
-            Route::get('update/user', [AdminController::class, 'ubah'])->name('ubahUser');
+            Route::get('update/user', [AdminController::class, 'ubahuser'])->name('ubahUser');
             Route::post('update/user', [AdminController::class, 'doubah'])->name('doUbah');
             Route::get('home/{id}', [AdminController::class, 'doHapus'])->name('doHapus');
         });

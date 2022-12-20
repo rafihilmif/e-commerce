@@ -55,13 +55,14 @@ class AdminController extends Controller
     }
 
     public function ubahuser(Request $req){
-        $customer = Customer::all()->where('id',$req->id);
-        $param["daftarcustomer"] = $customer;
+        $customer = Customer::all()->sortBy('id');
         //$param["cust"] = $cust;
-        return view('admin.update', $param);
+        return view('admin.update', ['customer' => $customer], compact('customer'));
     }
 
     public function doubah(Request $req){
+        $customer = Customer::find($req->id);
+
         $req->validate(
             [
                 'email' => 'required',
@@ -74,8 +75,8 @@ class AdminController extends Controller
                 'phone' => 'required'
             ]
         );
-        $ubahcust = Customer::where('id',$req->id);
-        $res = $ubahcust->update([
+
+        $res = $customer->update([
             'email' => $req->email,
             'name' => $req->name,
             'password' => $req->password,
@@ -97,6 +98,8 @@ class AdminController extends Controller
         // $res = $ubahcust->save();
         if($res){
             return redirect()->back()->with('pesanSukses', 'Berhasil Mengubah Customer');
+        }else{
+            return redirect()->back()->with('pesanGagal', 'Gagal Mengubah Customer');
         }
     }
 

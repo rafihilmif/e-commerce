@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    {{-- {{ $product->links('vendor.pagination.bootstrap-5') }} --}}
+                                    {{-- {{ $cust->links('vendor.pagination.bootstrap-5') }} --}}
                                 </div>
                             </section>
                         </div>

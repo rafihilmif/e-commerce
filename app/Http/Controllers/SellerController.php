@@ -61,10 +61,6 @@ class SellerController extends Controller
     {
         return view('seller.tag', ['title' => 'Add Tag']);
     }
-    public function contact()
-    {
-        return view('contact', ['title' => 'Contact']);
-    }
     public function about()
     {
         return view('about', ['title' => 'About']);
@@ -258,7 +254,7 @@ class SellerController extends Controller
 
     public function delivery()
     {
-        $orders = DB::table('orders')->paginate(5);
+        $orders = DB::table('orders')->paginate(12);
         return view('seller.delivery', ['title' => 'delivery'], compact('orders'));
     }
 
@@ -266,6 +262,24 @@ class SellerController extends Controller
     {
         $order = Orders::where('id', $id)->first();
         $detail = Order_product::where('id_order', $id)->first();
-        return view('seller.deliveryDetail', ['title' => 'delivery'], compact('order', 'detail'));
+        return view('seller.deliveryDetail', ['title' => 'Delivery'], compact('order', 'detail'));
+    }
+
+    public function showSort(Request $req)
+    {
+        if ($req->has('sorter')) {
+            switch ($req->get('sorter')) {
+                case 'asc':
+                    $orders = Orders::orderBy('created_at', 'asc')->paginate(12);
+                    break;
+
+                case 'desc':
+                    $orders = Orders::orderBy('created_at', 'desc')->paginate(12);
+                    break;
+            }
+        } else {
+            $orders = Orders::paginate(12);
+        }
+        return view('seller.delivery', ['title' => 'Delivery'], compact('orders'));
     }
 }

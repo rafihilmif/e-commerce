@@ -123,7 +123,7 @@ class CustomerController extends Controller
     public function cart(Request $req)
     {
         $carts = Cart::where('id_customer', Auth::id())->get();
-        return view('customer/cart', ['title' => 'cart'], compact('carts'));
+        return view('customer/cart', ['title' => 'Cart'], compact('carts'));
     }
     public function addToCart(Request $req)
     {
@@ -205,13 +205,13 @@ class CustomerController extends Controller
 
         $carts = Cart::where('id_customer', Auth::id())->get();
 
-        return view('customer/checkout', ['title' => 'checkout'], compact('carts'));
+        return view('customer/checkout', ['title' => 'Checkout'], compact('carts'));
     }
 
     public function wishlist(Request $req)
     {
         if (Auth::check()) {
-            return view('customer/wishlist', ['title' => 'wishlist']);
+            return view('customer/wishlist', ['title' => 'Wishlist']);
         }
     }
     public function addToWishlist(Product $product)

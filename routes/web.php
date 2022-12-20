@@ -2,6 +2,7 @@
 
     use App\Http\Controllers\AdminController;
     use App\Http\Controllers\CustomerController;
+    use App\Http\Controllers\EmailController;
     use App\Http\Controllers\SellerController;
     use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,8 @@
     Route::get('/register', [CustomerController::class, 'doRegister']);
     Route::get('logout', [CustomerController::class, 'logout'])->name('logout');
 
-    Route::get('contact', [SellerController::class, 'contact'])->name('contactus');
+    Route::get('contact', [EmailController::class, 'contact'])->name('contactus');
+    Route::post('email', [EmailController::class, 'sendEmail'])->name('sendEmail');
     Route::get('about', [SellerController::class, 'about'])->name('aboutus');
 
     Route::get('detail/{product}', [SellerController::class, 'productDetail'])->name('detail');
@@ -102,5 +104,7 @@
 
             Route::get('delivery', [SellerController::class, 'delivery'])->name('delivery');
             Route::get('delivery/detail/{id}', [SellerController::class, 'deliveryDetail'])->name('deliveryDetail');
+
+            Route::get('showSort', [SellerController::class, 'showSort'])->name('showSort');
         });
     });

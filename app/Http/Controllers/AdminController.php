@@ -57,7 +57,7 @@ class AdminController extends Controller
     }
 
     public function ubahuser(Request $req){
-        $cust = Customer::find($req->id);
+        $cust = Customer::all()->find($req->id);
         //$param["cust"] = $cust;
         return view('admin.update', ['customer' => $cust], compact('cust'));
     }

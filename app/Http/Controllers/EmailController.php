@@ -32,6 +32,6 @@ class EmailController extends Controller
                 ->subject($data['subject']);
         });
 
-        return back()->with(['message' => 'Email successfully sent!']);
+        return back()->with(['success' => 'Email successfully sent!']);
     }
 }

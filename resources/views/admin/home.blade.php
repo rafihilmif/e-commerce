@@ -81,7 +81,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @forelse ($daftarcustomer as $cust)
+                                                            @foreach ($daftarcustomer as $cust)
                                                                 <tr>
                                                                     <td class="text-bold-500">{{ $cust->email }}
                                                                     </td>
@@ -104,9 +104,7 @@
                                                                         <button type="submit" name="delete" class="btn btn-danger"><a href="{{ route('doHapus', $cust->id) }}" style="color:white">Delete</a></button>
                                                                     </td>
                                                                 </tr>
-                                                            @empty
-
-                                                            @endforelse
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>

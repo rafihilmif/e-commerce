@@ -89,35 +89,5 @@
                 </li>
             </ul>
         </div>
-        <div class="sidebar-menu">
-            <ul class="menu">
-                <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
-                        <i class="bi bi-star"></i>
-                        <span>Review & Rating</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="sidebar-menu">
-            <ul class="menu">
-                <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
-                        <i class="bi bi-journal-text"></i>
-                        <span>Report</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="sidebar-menu">
-            <ul class="menu">
-                <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-left"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
     </div>
 </div>

@@ -50,14 +50,16 @@ class AdminController extends Controller
             'phone' => $req->phone
         ]);
         if($res){
-            return redirect()->back()->with('pesan','Berhasil Menambah Customer');
+            return redirect()->back()->with('success','Berhasil Menambah Customer');
+        }else{
+            return redirect()->back()->with('error', 'Gagal Menambah Customer');
         }
     }
 
     public function ubahuser(Request $req){
-        $customer = Customer::all()->sortBy('id');
+        $cust = Customer::find($req->id);
         //$param["cust"] = $cust;
-        return view('admin.update', ['customer' => $customer], compact('customer'));
+        return view('admin.update', ['customer' => $cust], compact('cust'));
     }
 
     public function doubah(Request $req){
@@ -97,9 +99,9 @@ class AdminController extends Controller
         // $ubahcust->id = Uuid::uuid4()->getHex();
         // $res = $ubahcust->save();
         if($res){
-            return redirect()->back()->with('pesanSukses', 'Berhasil Mengubah Customer');
+            return redirect()->back()->with('success', 'Berhasil Mengubah Customer');
         }else{
-            return redirect()->back()->with('pesanGagal', 'Gagal Mengubah Customer');
+            return redirect()->back()->with('error', 'Gagal Mengubah Customer');
         }
     }
 
@@ -107,7 +109,7 @@ class AdminController extends Controller
         $customer = Customer::find($req->id);
         $res = $customer->delete();
         if($res){
-            return redirect()->back()->with('pesanGagal', 'Data Berhasil dihapus');
+            return redirect()->back()->with('info', 'Data Berhasil dihapus');
         }
     }
     // public function logs(Request $req){

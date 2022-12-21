@@ -11,6 +11,7 @@
 <body>
     <div id="app">
         @include('template.sidebaradmin')
+        @include('flash-message')
         <div id="main">
             @if (Session::has('pesanSukses'))
                 <div class="alert alert-success">

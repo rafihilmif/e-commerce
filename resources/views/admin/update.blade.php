@@ -90,6 +90,7 @@
 </head>
 <body>
     @include('template.sidebaradmin')
+    @include('flash-message')
     <div id="main">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
@@ -108,14 +109,13 @@
                                         <form class="form" action="{{ route('doUbah') }}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                {{-- <input type="hidden" name="id" value="{{ $customer->id }}"> --}}
+                                                {{-- <input type="hidden" name="id" value="{{ $cust->id }}"> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="first-name-column">Email</label>
                                                         <input type="text" id="first-name-column"
-                                                        <input type="text" id="first-name-column"
                                                             class="form-control" placeholder="Email" name="email"
-                                                            value="">
+                                                            value="{{""}}">
                                                         @error('email')
                                                             <div class="alert">{{ $message }}</div>
                                                         @enderror

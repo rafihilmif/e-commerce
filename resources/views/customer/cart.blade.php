@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <title>@yield('title', $title)</title>
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">

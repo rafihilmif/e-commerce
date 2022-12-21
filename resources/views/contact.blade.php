@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,11 +11,18 @@
     @include('customerstyle')
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
 </head>
+
 <body>
     <div class="wrapper">
+
         <head>@include('template.header')</head>
         <div class="contact-area pt-100 pb-100">
             <div class="container">
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-5 col-md-6">
                         <div class="contact-info-area">
@@ -27,7 +35,7 @@
                                         <i class="sli sli-location-pin"></i>
                                     </div>
                                     <div class="contact-info-content">
-                                         <p>Jl. Raya Gubeng No.66, Gubeng, Kec. Gubeng, Kota SBY, Jawa Timur 60281</p>
+                                        <p>Jl. Raya Gubeng No.66, Gubeng, Kec. Gubeng, Kota SBY, Jawa Timur 60281</p>
                                     </div>
                                 </div>
                                 <div class="single-contact-info">
@@ -51,11 +59,24 @@
                     </div>
                     <div class="col-lg-7 col-md-6">
                         <div class="contact-from contact-shadow">
-                            <form id="contact-form" action="assets/mail.php" method="post">
+                            <form id="contact-form" action="{{ route('sendEmail') }}" method="POST">
+                                @csrf
                                 <input name="name" type="text" placeholder="Name">
+                                @error('name')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
                                 <input name="email" type="email" placeholder="Email">
+                                @error('email')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
                                 <input name="subject" type="text" placeholder="Subject">
-                                <textarea name="message" placeholder="Your Message"></textarea>
+                                @error('subject')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                                <textarea name="content" placeholder="Your Message"></textarea>
+                                @error('content')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
                                 <button class="submit" type="submit">Send Message</button>
                             </form>
                             <p class="form-messege"></p>
@@ -72,4 +93,5 @@
     </script>
 
 </body>
+
 </html>
